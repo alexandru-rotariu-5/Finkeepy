@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     namespace 'com.alexrotariu.finkeepy'
@@ -59,4 +60,10 @@ dependencies {
     // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:31.2.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Firebase Firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 }

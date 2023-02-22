@@ -34,7 +34,9 @@ class DashboardFragment : Fragment() {
 
     private fun initObservers() {
         viewModel.netWorth.observe(viewLifecycleOwner) { newValue ->
-            updateNetWorthView(newValue)
+            if (newValue != null) {
+                updateNetWorthView(newValue)
+            }
         }
     }
 
