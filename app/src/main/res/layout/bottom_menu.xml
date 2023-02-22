@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_bottom_menu"
-    android:layout_height="wrap_content">
+    android:orientation="horizontal">
 
     <ImageButton
+        android:id="@+id/btnMenuDashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_menu_button"
         android:layout_weight="1"
-        android:src="@drawable/ic_dashboard"
-        android:padding="20dp"/>
+        android:background="@drawable/bg_bottom_menu_button"
+        android:padding="20dp"
+        android:src="@drawable/ic_dashboard" />
 
     <ImageButton
+        android:id="@+id/btnMenuRecords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_menu_button"
         android:layout_weight="1"
-        android:src="@drawable/ic_records"
-        android:padding="20dp"/>
+        android:background="@drawable/bg_bottom_menu_button"
+        android:padding="20dp"
+        android:src="@drawable/ic_records" />
 
     <ImageButton
+        android:id="@+id/btnMenuGraphs"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/bg_bottom_menu_button"
+        android:padding="20dp"
+        android:src="@drawable/ic_graphs" />
+
+    <ImageButton
+        android:id="@+id/btnMenuSettings"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_settings"
-        android:padding="20dp"/>
+        android:layout_weight="1"
+        android:background="@drawable/bg_bottom_menu_button"
+        android:padding="20dp"
+        android:src="@drawable/ic_settings" />
 
 </LinearLayout>

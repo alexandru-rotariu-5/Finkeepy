@@ -1,4 +1,4 @@
-package com.example.finkeepy
+package com.alexrotariu.finkeepy
 
 import org.junit.Test
 

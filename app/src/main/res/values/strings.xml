@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Finkeepy</string>
+
+    <!-- General -->
+    <string name="currency_ron">RON</string>
+    <string name="currency_euro">€</string>
 </resources>

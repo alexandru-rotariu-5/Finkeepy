@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "75900125367",
+    "project_id": "finkeepy",
+    "storage_bucket": "finkeepy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75900125367:android:df67c36b5ec24c0bdecd32",
+        "android_client_info": {
+          "package_name": "com.alexrotariu.finkeepy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75900125367-q12a4vbgan2ct3g4morlm8j6kj1i4vqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alexrotariu.finkeepy",
+            "certificate_hash": "362d4d0e2c8dff087f857ba60569f3cef6171326"
+          }
+        },
+        {
+          "client_id": "75900125367-s2q4sbo1h38ts1t6qir2rhvv70m3j026.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDczYXtlq6Hkf19Le2OP4thfwrweFk_XGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75900125367-s2q4sbo1h38ts1t6qir2rhvv70m3j026.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

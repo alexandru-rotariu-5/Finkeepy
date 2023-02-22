@@ -1,7 +1,8 @@
-package com.example.finkeepy
+package com.alexrotariu.finkeepy.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.alexrotariu.finkeepy.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
