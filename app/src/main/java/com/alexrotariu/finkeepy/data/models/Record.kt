@@ -27,6 +27,15 @@ data class Record(
             }
         }
 
+        fun List<DocumentSnapshot>.toRecordList(): List<Record?>? {
+            return try {
+                this.map { it.toRecord() }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error converting record list", e)
+                null
+            }
+        }
+
         private const val TAG = "Record"
     }
 }

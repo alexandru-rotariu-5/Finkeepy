@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.alexrotariu.finkeepy.App
+import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
-import com.alexrotariu.finkeepy.utils.toFormattedString
+import com.alexrotariu.finkeepy.utils.split
+import com.alexrotariu.finkeepy.utils.toFormattedNumberString
 import javax.inject.Inject
 
 class DashboardFragment : Fragment() {
@@ -41,6 +43,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun updateNetWorthView(netWorth: Double) {
-        binding.tvNetWorthWhole.text = netWorth.toFormattedString()
+        binding.tvNetWorthWhole.text = netWorth.split().first.toFormattedNumberString()
+        binding.tvNetWorthDecimal.text = String.format(getString(R.string.decimal), netWorth.split().second.toString())
     }
 }

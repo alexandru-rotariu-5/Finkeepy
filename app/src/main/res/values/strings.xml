@@ -3,5 +3,7 @@
 
     <!-- General -->
     <string name="currency_ron">RON</string>
-    <string name="currency_euro">€</string>
+    <string name="currency_euro">EUR</string>
+    <string name="decimal">.%1$s</string>
+
 </resources>

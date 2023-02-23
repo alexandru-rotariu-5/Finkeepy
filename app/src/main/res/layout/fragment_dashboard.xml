@@ -40,7 +40,7 @@
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/tvNetWorthWhole"
             app:layout_constraintTop_toTopOf="parent"
-            android:text=".00" />
+            tools:text=".00" />
 
         <TextView
             android:id="@+id/tvNetWorthCurrency"
@@ -52,7 +52,7 @@
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/tvNetWorthWhole"
             app:layout_constraintTop_toBottomOf="@id/tvNetWorthDecimal"
-            android:text="RON" />
+            android:text="@string/currency_ron" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
