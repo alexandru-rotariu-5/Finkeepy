@@ -9,6 +9,7 @@
     tools:context="com.alexrotariu.finkeepy.ui.dashboard.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNetWorth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,5 +56,13 @@
             android:text="@string/currency_ron" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRecords"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/clNetWorth"
+        tools:itemCount="3"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_record"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

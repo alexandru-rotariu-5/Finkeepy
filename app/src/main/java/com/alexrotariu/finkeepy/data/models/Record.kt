@@ -14,6 +14,14 @@ data class Record(
     val timestamp: Date
 ) : Parcelable {
 
+    fun getExpense(previousNetWorth: Double): Double {
+        return (previousNetWorth + income) - netWorth
+    }
+
+    fun getCashflow(previousNetWorth: Double): Double {
+        return netWorth - previousNetWorth
+    }
+
     companion object {
         fun DocumentSnapshot.toRecord(): Record? {
             return try {

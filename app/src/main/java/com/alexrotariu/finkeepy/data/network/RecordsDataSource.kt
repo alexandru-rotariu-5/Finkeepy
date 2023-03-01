@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.data.datasources
+package com.alexrotariu.finkeepy.data.network
 
 import android.util.Log
 import com.alexrotariu.finkeepy.data.models.Record
@@ -36,4 +36,5 @@ class RecordsDataSource @Inject constructor(db: FirebaseFirestore) {
             null
         }
     }
+
 }
