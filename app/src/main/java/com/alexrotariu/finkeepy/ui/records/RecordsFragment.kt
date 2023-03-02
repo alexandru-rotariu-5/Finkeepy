@@ -1,38 +1,41 @@
-package com.alexrotariu.finkeepy.ui.dashboard
+package com.alexrotariu.finkeepy.ui.records
 
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
+import com.alexrotariu.finkeepy.databinding.FragmentRecordsBinding
 import com.alexrotariu.finkeepy.ui.RecordAdapter
+import com.alexrotariu.finkeepy.ui.dashboard.DashboardViewModel
+import com.alexrotariu.finkeepy.ui.dashboard.RecordItemDecoration
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.split
 import javax.inject.Inject
 
-class DashboardFragment : Fragment() {
+class RecordsFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentRecordsBinding? = null
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var viewModel: DashboardViewModel
+    lateinit var viewModel: RecordsViewModel
     private lateinit var recordAdapter: RecordAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+    ): View? {
+        _binding = FragmentRecordsBinding.inflate(inflater, container, false)
         (activity?.application as App).appComponent.inject(this)
         initRecordsAdapter()
         return binding.root
@@ -45,7 +48,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initRecordsAdapter() {
-        recordAdapter = RecordAdapter(3)
+        recordAdapter = RecordAdapter()
         binding.rvRecords.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recordAdapter
@@ -57,38 +60,8 @@ class DashboardFragment : Fragment() {
     private fun initObservers() {
         viewModel.records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
-                updateNetWorthView(viewModel.getNetWorth())
-                updateLastMonthCashflowView(viewModel.getLastMonthCashflow())
                 updateRecords(records)
             }
-        }
-    }
-
-    private fun updateNetWorthView(netWorth: Double) {
-        binding.tvNetWorthWhole.text = netWorth.split().first.format()
-        binding.tvNetWorthDecimal.text =
-            String.format(getString(R.string.decimal), netWorth.split().second.toString())
-    }
-
-    private fun updateLastMonthCashflowView(cashflow: Double) {
-        val text =
-            String.format(getString(R.string.last_month_cashflow), cashflow.split().first.format())
-
-        val formattedText = SpannableStringBuilder(text)
-
-        formattedText.setSpan(
-            StyleSpan(Typeface.BOLD),
-            0,
-            text.substring(0, text.indexOf(" ")).length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        binding.tvLastMonthCashflow.text = formattedText
-
-        binding.ivCashflowArrow.visibility = View.VISIBLE
-
-        if (cashflow < 0) {
-            binding.ivCashflowArrow.rotation = 180f
         }
     }
 

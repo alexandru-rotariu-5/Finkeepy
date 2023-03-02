@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui.dashboard
+package com.alexrotariu.finkeepy.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.ItemRecordBinding
 import com.alexrotariu.finkeepy.utils.format
-import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class RecordAdapter(private val limit: Int) : ListAdapter<Record, RecordAdapter.RecordViewHolder>(RecordDiffCallback()) {
+class RecordAdapter(private val limit: Int = 10_000) : ListAdapter<Record, RecordAdapter.RecordViewHolder>(
+    RecordDiffCallback()
+) {
 
     private var fullList: List<Record?>? = null
 
@@ -42,8 +43,7 @@ class RecordAdapter(private val limit: Int) : ListAdapter<Record, RecordAdapter.
 
             val previousNetWorth = fullList.getOrNull(position + 1)?.netWorth ?: 0.0
 
-
-            holder.bind(record!!, previousNetWorth!!)
+            holder.bind(record!!, previousNetWorth)
         }
     }
 
