@@ -2,7 +2,7 @@ package com.alexrotariu.finkeepy.utils
 
 import java.text.DecimalFormat
 
-fun Int.toFormattedNumberString(): String {
+fun <T : Number> T.format(): String {
     val formatter = DecimalFormat("#,###,###")
     return formatter.format(this)
 }

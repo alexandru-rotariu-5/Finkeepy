@@ -9,20 +9,17 @@ import com.alexrotariu.finkeepy.data.repositories.RecordsRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DashboardViewModel @Inject constructor(private val recordsRepository: RecordsRepository) : ViewModel() {
-
-    private val _netWorth = MutableLiveData<Double?>()
-    val netWorth: LiveData<Double?> = _netWorth
+class DashboardViewModel @Inject constructor(private val recordsRepository: RecordsRepository) :
+    ViewModel() {
 
     private val _records = MutableLiveData<List<Record?>?>()
     val records: LiveData<List<Record?>?> = _records
 
     init {
-        getNetWorth()
-        getAllRecords()
+        getRecords()
     }
 
-    private fun getAllRecords() {
+    private fun getRecords() {
         viewModelScope.launch {
             val response = recordsRepository.getAllRecords()
             if (response != null) {
@@ -31,12 +28,13 @@ class DashboardViewModel @Inject constructor(private val recordsRepository: Reco
         }
     }
 
-    private fun getNetWorth() {
-        viewModelScope.launch {
-            val response = recordsRepository.getNetWorth()
-            if (response != null) {
-                _netWorth.value = response
-            }
-        }
+    fun getNetWorth(): Double {
+        return records.value?.get(0)?.netWorth ?: 0.0
     }
+
+    fun getLastMonthCashflow(): Double {
+        return records.value?.get(1)?.netWorth?.let { records.value?.get(0)?.getCashflow(it) }
+            ?: 0.0
+    }
+
 }

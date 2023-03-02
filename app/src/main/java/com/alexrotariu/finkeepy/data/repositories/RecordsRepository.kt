@@ -7,10 +7,6 @@ import javax.inject.Inject
 class RecordsRepository @Inject constructor(private val recordsDataSource: RecordsDataSource) {
 
     suspend fun getAllRecords(): List<Record?>? {
-        return recordsDataSource.getAllRecords()
-    }
-
-    suspend fun getNetWorth(): Double? {
-        return recordsDataSource.getMostRecentRecord()?.netWorth
+        return recordsDataSource.getRecords(10_000)
     }
 }

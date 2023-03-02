@@ -11,7 +11,7 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
 import com.alexrotariu.finkeepy.utils.split
-import com.alexrotariu.finkeepy.utils.toFormattedNumberString
+import com.alexrotariu.finkeepy.utils.format
 import javax.inject.Inject
 
 class DashboardFragment : Fragment() {
@@ -40,7 +40,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initRecordsAdapter() {
-        recordAdapter = RecordAdapter()
+        recordAdapter = RecordAdapter(3)
         binding.rvRecords.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recordAdapter
@@ -50,26 +50,26 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.netWorth.observe(viewLifecycleOwner) { newValue ->
-            if (newValue != null) {
-                updateNetWorthView(newValue)
-            }
-        }
-
-        viewModel.records.observe(viewLifecycleOwner) { newValue ->
-            if (newValue != null) {
-                updateRecords(newValue)
+        viewModel.records.observe(viewLifecycleOwner) { records ->
+            if (records != null) {
+                updateNetWorthView(viewModel.getNetWorth())
+                updateLastMonthCashflowView(viewModel.getLastMonthCashflow())
+                updateRecords(records)
             }
         }
     }
 
     private fun updateNetWorthView(netWorth: Double) {
-        binding.tvNetWorthWhole.text = netWorth.split().first.toFormattedNumberString()
+        binding.tvNetWorthWhole.text = netWorth.split().first.format()
         binding.tvNetWorthDecimal.text =
             String.format(getString(R.string.decimal), netWorth.split().second.toString())
     }
 
-    private fun updateRecords(records: List<Record?>) {
-        recordAdapter.submitList(records)
+    private fun updateLastMonthCashflowView(cashflow: Double) {
+        binding.tvLastMonthCashflow.text = cashflow.split().first.format()
+    }
+
+    private fun updateRecords(records: List<Record?>?) {
+        recordAdapter.setFullList(records)
     }
 }
