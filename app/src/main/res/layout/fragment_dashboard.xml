@@ -83,17 +83,27 @@
         app:layout_constraintTop_toBottomOf="@id/clNetWorth"
         tools:text="200 last month" />
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lcMainGraph"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLastMonthCashflow" />
+
     <include
         android:id="@+id/lRecordsLabels"
         layout="@layout/header_record_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="74dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLastMonthCashflow" />
+        app:layout_constraintTop_toBottomOf="@id/lcMainGraph" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecords"

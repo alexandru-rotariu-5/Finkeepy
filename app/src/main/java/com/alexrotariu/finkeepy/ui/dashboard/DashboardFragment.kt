@@ -8,6 +8,7 @@ import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexrotariu.finkeepy.R
@@ -18,6 +19,9 @@ import com.alexrotariu.finkeepy.ui.RecordAdapter
 import com.alexrotariu.finkeepy.ui.records.RecordsFragment
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.split
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 
 class DashboardFragment : Fragment() {
 
@@ -38,11 +42,55 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupGraph()
         initObservers()
         initClickListeners()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
+
+    private fun setupGraph() {
+        with(binding.lcMainGraph) {
+            xAxis.setDrawGridLines(false)
+            xAxis.setDrawAxisLine(false)
+
+            axisLeft.setDrawGridLines(false)
+            axisRight.setDrawGridLines(false)
+
+            axisLeft.setDrawAxisLine(false)
+            axisRight.setDrawAxisLine(false)
+
+            description.isEnabled = false
+            legend.isEnabled = false
+
+            xAxis.setDrawLabels(false)
+            axisLeft.setDrawLabels(false)
+            axisRight.setDrawLabels(false)
+
+            isHighlightPerTapEnabled = false
+            isHighlightPerDragEnabled = false
+
+            setNoDataText(getString(R.string.no_records_available))
+            setNoDataTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+    }
+
+    private fun updateGraphData(data: List<Entry>, label: String) {
+        val dataSet = LineDataSet(data, label)
+
+        dataSet.color = ContextCompat.getColor(requireContext(), R.color.white)
+        dataSet.setDrawCircles(false)
+        dataSet.setDrawValues(false)
+
+        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+        dataSet.cubicIntensity = 0.2f
+        dataSet.lineWidth = 3f
+
+        val lineData = LineData(dataSet)
+
+        binding.lcMainGraph.data = lineData
+        binding.lcMainGraph.invalidate()
+    }
 
     private fun initRecordsAdapter() {
         recordAdapter = RecordAdapter(3)
@@ -64,6 +112,7 @@ class DashboardFragment : Fragment() {
                 updateNetWorthView(getViewModel().getNetWorth())
                 updateLastMonthCashflowView(getViewModel().getLastMonthCashflow())
                 updateRecords(records)
+                updateGraphData(getViewModel().getChartEntries(), getString(R.string.net_worth))
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.data.repositories.RecordsRepository
+import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,6 +36,19 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
     fun getLastMonthCashflow(): Double {
         return records.value?.get(1)?.netWorth?.let { records.value?.get(0)?.getCashflow(it) }
             ?: 0.0
+    }
+
+    fun getChartEntries(): List<Entry> {
+        val entries: MutableList<Entry> = mutableListOf()
+
+        records.value?.reversed()?.forEachIndexed { index, record ->
+            if (record != null) {
+                val xValue = index.toFloat()
+                val yValue = record.netWorth.toFloat()
+                entries.add(Entry(xValue, yValue))
+            }
+        }
+        return entries
     }
 
 }
