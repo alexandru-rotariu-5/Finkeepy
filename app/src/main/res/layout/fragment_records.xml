@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
-    android:paddingHorizontal="20dp"
     tools:context="ui.records.RecordsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
