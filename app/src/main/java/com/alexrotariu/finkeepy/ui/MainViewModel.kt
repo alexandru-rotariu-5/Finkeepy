@@ -16,6 +16,9 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
     private val _records = MutableLiveData<List<Record?>?>()
     val records: LiveData<List<Record?>?> = _records
 
+    private val _graphValueType = MutableLiveData(ValueType.NET_WORTH)
+    val graphValueType: LiveData<ValueType> = _graphValueType
+
     init {
         getRecords()
     }
@@ -42,9 +45,16 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
         val entries: MutableList<Entry> = mutableListOf()
 
         records.value?.reversed()?.forEachIndexed { index, record ->
+            val previousNetWorth = records.value?.getOrNull(index + 1)?.netWorth ?: 0.0
             if (record != null) {
                 val xValue = index.toFloat()
-                val yValue = record.netWorth.toFloat()
+                val yValue = when (_graphValueType.value) {
+                    ValueType.NET_WORTH -> record.netWorth.toFloat()
+                    ValueType.INCOME -> record.income.toFloat()
+                    ValueType.EXPENSE -> record.getExpense(previousNetWorth).toFloat()
+                    ValueType.CASHFLOW -> record.getCashflow(previousNetWorth).toFloat()
+                    else -> record.netWorth.toFloat()
+                }
                 entries.add(Entry(xValue, yValue))
             }
         }

@@ -16,6 +16,7 @@ import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
 import com.alexrotariu.finkeepy.ui.MainActivity
 import com.alexrotariu.finkeepy.ui.RecordAdapter
+import com.alexrotariu.finkeepy.ui.ValueType
 import com.alexrotariu.finkeepy.ui.records.RecordsFragment
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.split
@@ -75,8 +76,8 @@ class DashboardFragment : Fragment() {
         }
     }
 
-    private fun updateGraphData(data: List<Entry>, label: String) {
-        val dataSet = LineDataSet(data, label)
+    private fun updateGraphData(data: List<Entry>, label: ValueType) {
+        val dataSet = LineDataSet(data, getString(label.labelResource))
 
         dataSet.color = ContextCompat.getColor(requireContext(), R.color.white)
         dataSet.setDrawCircles(false)
@@ -112,7 +113,10 @@ class DashboardFragment : Fragment() {
                 updateNetWorthView(getViewModel().getNetWorth())
                 updateLastMonthCashflowView(getViewModel().getLastMonthCashflow())
                 updateRecords(records)
-                updateGraphData(getViewModel().getChartEntries(), getString(R.string.net_worth))
+                updateGraphData(
+                    getViewModel().getChartEntries(),
+                    getViewModel().graphValueType.value!!
+                )
             }
         }
     }
