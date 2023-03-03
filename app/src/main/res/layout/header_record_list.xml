@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/llRecordsLabels"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Net Worth -->
+    <TextView
+        android:id="@+id/tvNetWorth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/bold"
+        android:text="@string/net_worth"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        tools:ignore="NestedWeights" />
+
+    <!-- Income -->
+    <TextView
+        android:id="@+id/tvIncome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/bold"
+        android:text="@string/income"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <!-- Expense -->
+    <TextView
+        android:id="@+id/tvExpense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/bold"
+        android:text="@string/expense"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <!-- Cash Flow -->
+    <TextView
+        android:id="@+id/tvCashflow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/bold"
+        android:text="@string/cashflow"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+</LinearLayout>

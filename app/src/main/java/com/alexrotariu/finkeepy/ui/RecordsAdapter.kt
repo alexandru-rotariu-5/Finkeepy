@@ -53,6 +53,8 @@ class RecordAdapter(private val limit: Int = 10_000) :
     class RecordViewHolder(private val binding: ItemRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private val dateFormat = SimpleDateFormat("MMM", Locale.getDefault())
+
         fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean) {
             binding.llRecordData.background = if (isFirstItem) {
                 ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_white)
@@ -71,8 +73,7 @@ class RecordAdapter(private val limit: Int = 10_000) :
             binding.tvExpense.setTextColor(textColor)
             binding.tvCashflow.setTextColor(textColor)
 
-            binding.tvMonth.text =
-                SimpleDateFormat("MMM", Locale.getDefault()).format(record.timestamp)
+            binding.tvMonth.text = dateFormat.format(record.timestamp)
             binding.tvNetWorth.text = record.netWorth.format()
             binding.tvIncome.text = record.income.format()
             binding.tvExpense.text = record.getExpense(previousNetWorth).format()

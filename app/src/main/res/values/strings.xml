@@ -5,6 +5,10 @@
     <string name="currency_ron">RON</string>
     <string name="currency_euro">EUR</string>
     <string name="decimal">.%1$s</string>
+    <string name="net_worth">Net worth</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="cashflow">Cashflow</string>
 
     <!-- Dashboard -->
     <string name="last_month_cashflow">%1$s RON last month</string>

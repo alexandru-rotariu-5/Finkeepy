@@ -7,16 +7,29 @@
     android:background="?attr/colorPrimary"
     tools:context="ui.records.RecordsFragment">
 
+    <include
+        android:id="@+id/lRecordsLabels"
+        layout="@layout/header_record_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecords"
         android:layout_width="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp"
-        android:paddingVertical="20dp"
         android:clipToPadding="false"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lRecordsLabels"
         tools:listitem="@layout/item_record" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
