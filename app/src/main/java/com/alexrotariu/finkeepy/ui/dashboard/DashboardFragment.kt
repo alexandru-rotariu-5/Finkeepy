@@ -20,6 +20,7 @@ import com.alexrotariu.finkeepy.ui.ValueType
 import com.alexrotariu.finkeepy.ui.records.RecordsFragment
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.split
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -52,6 +53,8 @@ class DashboardFragment : Fragment() {
 
     private fun setupGraph() {
         with(binding.lcMainGraph) {
+            xAxis.position = XAxis.XAxisPosition.BOTTOM
+
             xAxis.setDrawGridLines(false)
             xAxis.setDrawAxisLine(false)
 
@@ -64,9 +67,11 @@ class DashboardFragment : Fragment() {
             description.isEnabled = false
             legend.isEnabled = false
 
-            xAxis.setDrawLabels(false)
+            xAxis.setDrawLabels(true)
             axisLeft.setDrawLabels(false)
             axisRight.setDrawLabels(false)
+
+            xAxis.textColor = ContextCompat.getColor(requireContext(), R.color.white)
 
             isHighlightPerTapEnabled = false
             isHighlightPerDragEnabled = false
