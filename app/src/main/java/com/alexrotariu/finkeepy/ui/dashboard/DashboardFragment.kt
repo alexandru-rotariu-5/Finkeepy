@@ -15,6 +15,7 @@ import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
 import com.alexrotariu.finkeepy.ui.MainActivity
 import com.alexrotariu.finkeepy.ui.RecordAdapter
+import com.alexrotariu.finkeepy.ui.records.RecordsFragment
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.split
 
@@ -38,6 +39,7 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initObservers()
+        initClickListeners()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
@@ -50,6 +52,12 @@ class DashboardFragment : Fragment() {
         }
 
         binding.rvRecords.addItemDecoration(RecordItemDecoration(resources.getDimensionPixelSize(R.dimen.record_item_vertical_space)))
+    }
+
+    private fun initClickListeners() {
+        binding.tvSeeAllRecords.setOnClickListener {
+            (activity as MainActivity).openFragment(RecordsFragment())
+        }
     }
 
     private fun initObservers() {
@@ -82,7 +90,6 @@ class DashboardFragment : Fragment() {
         )
 
         binding.tvLastMonthCashflow.text = formattedText
-
         binding.ivCashflowArrow.visibility = View.VISIBLE
 
         if (cashflow < 0) {

@@ -2,18 +2,21 @@ package com.alexrotariu.finkeepy.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.ItemRecordBinding
 import com.alexrotariu.finkeepy.utils.format
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class RecordAdapter(private val limit: Int = 10_000) : ListAdapter<Record, RecordAdapter.RecordViewHolder>(
-    RecordDiffCallback()
-) {
+class RecordAdapter(private val limit: Int = 10_000) :
+    ListAdapter<Record, RecordAdapter.RecordViewHolder>(
+        RecordDiffCallback()
+    ) {
 
     private var fullList: List<Record?>? = null
 
@@ -43,14 +46,31 @@ class RecordAdapter(private val limit: Int = 10_000) : ListAdapter<Record, Recor
 
             val previousNetWorth = fullList.getOrNull(position + 1)?.netWorth ?: 0.0
 
-            holder.bind(record!!, previousNetWorth)
+            holder.bind(record!!, previousNetWorth, position == 0)
         }
     }
 
     class RecordViewHolder(private val binding: ItemRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(record: Record, previousNetWorth: Double) {
+        fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean) {
+            binding.llRecordData.background = if (isFirstItem) {
+                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_white)
+            } else {
+                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data)
+            }
+
+            val textColor = if (isFirstItem) {
+                ContextCompat.getColor(binding.root.context, R.color.turquoise)
+            } else {
+                ContextCompat.getColor(binding.root.context, R.color.white)
+            }
+
+            binding.tvNetWorth.setTextColor(textColor)
+            binding.tvIncome.setTextColor(textColor)
+            binding.tvExpense.setTextColor(textColor)
+            binding.tvCashflow.setTextColor(textColor)
+
             binding.tvMonth.text =
                 SimpleDateFormat("MMM", Locale.getDefault()).format(record.timestamp)
             binding.tvNetWorth.text = record.netWorth.format()

@@ -93,4 +93,20 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_record" />
 
+    <TextView
+        android:id="@+id/tvSeeAllRecords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_see_more_records"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/bold"
+        android:text="@string/see_all_records"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvRecords" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
