@@ -43,9 +43,10 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
 
     fun getChartEntries(): List<Entry> {
         val entries: MutableList<Entry> = mutableListOf()
+        val reversedRecords = records.value?.reversed()
 
-        records.value?.reversed()?.forEachIndexed { index, record ->
-            val previousNetWorth = records.value?.getOrNull(index + 1)?.netWorth ?: 0.0
+        reversedRecords?.forEachIndexed { index, record ->
+            val previousNetWorth = reversedRecords.getOrNull(index - 1)?.netWorth ?: 0.0
             if (record != null) {
                 val xValue = index.toFloat()
                 val yValue = when (_graphValueType.value) {

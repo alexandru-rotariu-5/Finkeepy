@@ -24,6 +24,10 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class DashboardFragment : Fragment() {
 
@@ -53,25 +57,22 @@ class DashboardFragment : Fragment() {
 
     private fun setupGraph() {
         with(binding.lcMainGraph) {
-            xAxis.position = XAxis.XAxisPosition.BOTTOM
+            setupGraphXAxis()
 
-            xAxis.setDrawGridLines(false)
-            xAxis.setDrawAxisLine(false)
+            axisLeft.apply {
+                setDrawGridLines(false)
+                setDrawAxisLine(false)
+                setDrawLabels(false)
+            }
 
-            axisLeft.setDrawGridLines(false)
-            axisRight.setDrawGridLines(false)
-
-            axisLeft.setDrawAxisLine(false)
-            axisRight.setDrawAxisLine(false)
+            axisRight.apply {
+                setDrawGridLines(false)
+                setDrawAxisLine(false)
+                setDrawLabels(false)
+            }
 
             description.isEnabled = false
             legend.isEnabled = false
-
-            xAxis.setDrawLabels(true)
-            axisLeft.setDrawLabels(false)
-            axisRight.setDrawLabels(false)
-
-            xAxis.textColor = ContextCompat.getColor(requireContext(), R.color.white)
 
             isHighlightPerTapEnabled = false
             isHighlightPerDragEnabled = false
@@ -80,6 +81,29 @@ class DashboardFragment : Fragment() {
             setNoDataTextColor(ContextCompat.getColor(requireContext(), R.color.white))
         }
     }
+
+
+    private fun setupGraphXAxis() {
+        with(binding.lcMainGraph.xAxis) {
+            position = XAxis.XAxisPosition.BOTTOM
+            setDrawGridLines(false)
+            setDrawAxisLine(false)
+            setDrawLabels(true)
+            granularity = 1f
+            valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String? {
+                    val index = value.toInt()
+                    if (index >= 0 && index < (getViewModel().records.value?.size ?: 0)) {
+                        val date = getViewModel().records.value?.reversed()?.get(index)?.timestamp
+                        return date?.let { SimpleDateFormat("MMM yy", Locale.getDefault()).format(it) }
+                    }
+                    return ""
+                }
+            }
+            textColor = ContextCompat.getColor(requireContext(), R.color.white)
+        }
+    }
+
 
     private fun updateGraphData(data: List<Entry>, label: ValueType) {
         val dataSet = LineDataSet(data, getString(label.labelResource))
