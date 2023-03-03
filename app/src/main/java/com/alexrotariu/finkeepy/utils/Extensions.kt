@@ -12,3 +12,11 @@ fun Double.split(): Pair<Int, Int> {
     val decimal = ((this - whole) * 100).toInt()
     return Pair(whole, decimal)
 }
+
+fun String.formatDecimalString(): String {
+    return if (this == "0") {
+        "00"
+    } else {
+        this
+    }
+}

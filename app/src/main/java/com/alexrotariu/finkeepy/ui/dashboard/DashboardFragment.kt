@@ -19,6 +19,7 @@ import com.alexrotariu.finkeepy.ui.RecordAdapter
 import com.alexrotariu.finkeepy.ui.ValueType
 import com.alexrotariu.finkeepy.ui.records.RecordsFragment
 import com.alexrotariu.finkeepy.utils.format
+import com.alexrotariu.finkeepy.utils.formatDecimalString
 import com.alexrotariu.finkeepy.utils.split
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -26,7 +27,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class DashboardFragment : Fragment() {
@@ -91,19 +91,21 @@ class DashboardFragment : Fragment() {
             setDrawLabels(true)
             granularity = 1f
             valueFormatter = object : ValueFormatter() {
-                override fun getFormattedValue(value: Float): String? {
-                    val index = value.toInt()
-                    if (index >= 0 && index < (getViewModel().records.value?.size ?: 0)) {
-                        val date = getViewModel().records.value?.reversed()?.get(index)?.timestamp
-                        return date?.let { SimpleDateFormat("MMM yy", Locale.getDefault()).format(it) }
-                    }
-                    return ""
-                }
+                override fun getFormattedValue(value: Float): String? =
+                    formatGraphLabelToDate(value)
             }
             textColor = ContextCompat.getColor(requireContext(), R.color.white)
         }
     }
 
+    private fun formatGraphLabelToDate(value: Float): String? {
+        val index = value.toInt()
+        if (index >= 0 && index < (getViewModel().records.value?.size ?: 0)) {
+            val date = getViewModel().records.value?.reversed()?.get(index)?.timestamp
+            return date?.let { SimpleDateFormat("MMM yy", Locale.getDefault()).format(it) }
+        }
+        return ""
+    }
 
     private fun updateGraphData(data: List<Entry>, label: ValueType) {
         val dataSet = LineDataSet(data, getString(label.labelResource))
@@ -123,7 +125,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initRecordsAdapter() {
-        recordAdapter = RecordAdapter(3)
+        recordAdapter = RecordAdapter(RECORDS_LIMIT)
         binding.rvRecords.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recordAdapter
@@ -153,7 +155,7 @@ class DashboardFragment : Fragment() {
     private fun updateNetWorthView(netWorth: Double) {
         binding.tvNetWorthWhole.text = netWorth.split().first.format()
         binding.tvNetWorthDecimal.text =
-            String.format(getString(R.string.decimal), netWorth.split().second.toString())
+            String.format(getString(R.string.decimal), netWorth.split().second.toString().formatDecimalString())
     }
 
     private fun updateLastMonthCashflowView(cashflow: Double) {
@@ -179,5 +181,9 @@ class DashboardFragment : Fragment() {
 
     private fun updateRecords(records: List<Record?>?) {
         recordAdapter.setFullList(records)
+    }
+
+    companion object {
+        const val RECORDS_LIMIT = 3
     }
 }
