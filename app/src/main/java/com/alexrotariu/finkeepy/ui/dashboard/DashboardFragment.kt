@@ -10,22 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
+import com.alexrotariu.finkeepy.ui.MainActivity
 import com.alexrotariu.finkeepy.ui.RecordAdapter
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.split
-import javax.inject.Inject
 
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var viewModel: DashboardViewModel
     private lateinit var recordAdapter: RecordAdapter
 
     override fun onCreateView(
@@ -33,7 +30,6 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        (activity?.application as App).appComponent.inject(this)
         initRecordsAdapter()
         return binding.root
     }
@@ -43,6 +39,8 @@ class DashboardFragment : Fragment() {
 
         initObservers()
     }
+
+    private fun getViewModel() = (activity as MainActivity).viewModel
 
     private fun initRecordsAdapter() {
         recordAdapter = RecordAdapter(3)
@@ -55,10 +53,10 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.records.observe(viewLifecycleOwner) { records ->
+        getViewModel().records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
-                updateNetWorthView(viewModel.getNetWorth())
-                updateLastMonthCashflowView(viewModel.getLastMonthCashflow())
+                updateNetWorthView(getViewModel().getNetWorth())
+                updateLastMonthCashflowView(getViewModel().getLastMonthCashflow())
                 updateRecords(records)
             }
         }

@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui.dashboard
+package com.alexrotariu.finkeepy.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import com.alexrotariu.finkeepy.data.repositories.RecordsRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DashboardViewModel @Inject constructor(private val recordsRepository: RecordsRepository) :
+class MainViewModel @Inject constructor(private val recordsRepository: RecordsRepository) :
     ViewModel() {
 
     private val _records = MutableLiveData<List<Record?>?>()
