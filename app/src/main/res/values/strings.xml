@@ -15,4 +15,7 @@
     <string name="see_all_records">See all…</string>
     <string name="no_records_available">No records available.</string>
 
+    <!-- Records -->
+    <string name="my_data">My data</string>
+
 </resources>
