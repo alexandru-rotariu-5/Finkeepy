@@ -51,6 +51,7 @@ class DashboardFragment : Fragment() {
         setupGraph()
         initObservers()
         initClickListeners()
+        initSwipeListener()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
@@ -130,6 +131,14 @@ class DashboardFragment : Fragment() {
         binding.rvRecords.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recordAdapter
+        }
+    }
+
+    private fun initSwipeListener() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getViewModel().getRecords {
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
         }
     }
 

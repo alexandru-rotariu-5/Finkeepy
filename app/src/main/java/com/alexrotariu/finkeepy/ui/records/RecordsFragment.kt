@@ -35,6 +35,7 @@ class RecordsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initObservers()
+        initSwipeListener()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
@@ -51,6 +52,14 @@ class RecordsFragment : Fragment() {
         getViewModel().records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
                 updateRecords(records)
+            }
+        }
+    }
+
+    private fun initSwipeListener() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getViewModel().getRecords {
+                binding.swipeRefreshLayout.isRefreshing = false
             }
         }
     }

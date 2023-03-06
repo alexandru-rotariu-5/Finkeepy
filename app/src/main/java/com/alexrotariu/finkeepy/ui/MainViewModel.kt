@@ -23,12 +23,13 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
         getRecords()
     }
 
-    private fun getRecords() {
+    fun getRecords(callback: () -> Unit = {}) {
         viewModelScope.launch {
             val response = recordsRepository.getAllRecords()
             if (response != null) {
                 _records.value = response
             }
+            callback()
         }
     }
 
