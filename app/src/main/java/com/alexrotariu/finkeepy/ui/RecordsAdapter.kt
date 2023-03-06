@@ -75,7 +75,7 @@ class RecordAdapter(private val limit: Int = 10_000) :
             binding.tvExpense.setTextColor(textColor)
             binding.tvCashflow.setTextColor(textColor)
 
-            if (record.timestamp.month == Month.DECEMBER) {
+            if (record.timestamp.month == Month.DECEMBER && !isFirstItem) {
                 binding.llYear.visibility = View.VISIBLE
                 binding.tvYear.text = record.timestamp.plusYears(1).year.toString()
             } else {
