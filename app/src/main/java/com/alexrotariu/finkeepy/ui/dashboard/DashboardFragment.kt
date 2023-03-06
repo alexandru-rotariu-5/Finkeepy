@@ -26,7 +26,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
-import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class DashboardFragment : Fragment() {
@@ -102,10 +102,11 @@ class DashboardFragment : Fragment() {
         val index = value.toInt()
         if (index >= 0 && index < (getViewModel().records.value?.size ?: 0)) {
             val date = getViewModel().records.value?.reversed()?.get(index)?.timestamp
-            return date?.let { SimpleDateFormat("MMM yy", Locale.getDefault()).format(it) }
+            return date?.let { DateTimeFormatter.ofPattern("MMM yy", Locale.getDefault()).format(it) }
         }
         return ""
     }
+
 
     private fun updateGraphData(data: List<Entry>, label: ValueType) {
         val dataSet = LineDataSet(data, getString(label.labelResource))

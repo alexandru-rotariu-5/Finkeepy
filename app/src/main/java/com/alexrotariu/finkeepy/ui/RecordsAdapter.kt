@@ -1,6 +1,7 @@
 package com.alexrotariu.finkeepy.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,8 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.ItemRecordBinding
 import com.alexrotariu.finkeepy.utils.format
-import java.text.SimpleDateFormat
+import java.time.Month
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class RecordAdapter(private val limit: Int = 10_000) :
@@ -53,7 +55,7 @@ class RecordAdapter(private val limit: Int = 10_000) :
     class RecordViewHolder(private val binding: ItemRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val dateFormat = SimpleDateFormat("MMM", Locale.getDefault())
+        private val dateFormat = DateTimeFormatter.ofPattern("MMM", Locale.getDefault())
 
         fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean) {
             binding.llRecordData.background = if (isFirstItem) {
@@ -72,6 +74,13 @@ class RecordAdapter(private val limit: Int = 10_000) :
             binding.tvIncome.setTextColor(textColor)
             binding.tvExpense.setTextColor(textColor)
             binding.tvCashflow.setTextColor(textColor)
+
+            if (record.timestamp.month == Month.DECEMBER) {
+                binding.llYear.visibility = View.VISIBLE
+                binding.tvYear.text = record.timestamp.plusYears(1).year.toString()
+            } else {
+                binding.llYear.visibility = View.GONE
+            }
 
             binding.tvMonth.text = dateFormat.format(record.timestamp)
             binding.tvNetWorth.text = record.netWorth.format()
