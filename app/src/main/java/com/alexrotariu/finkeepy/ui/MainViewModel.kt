@@ -19,17 +19,22 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
     private val _graphValueType = MutableLiveData(ValueType.NET_WORTH)
     val graphValueType: LiveData<ValueType> = _graphValueType
 
+    private val _isLoading = MutableLiveData(false)
+    val isLoading: LiveData<Boolean> = _isLoading
+
     init {
         getRecords()
     }
 
     fun getRecords(callback: () -> Unit = {}) {
+        _isLoading.value = true
         viewModelScope.launch {
             val response = recordsRepository.getAllRecords()
             if (response != null) {
                 _records.value = response
             }
             callback()
+            _isLoading.value = false
         }
     }
 

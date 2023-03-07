@@ -5,15 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentRecordsBinding
 import com.alexrotariu.finkeepy.ui.MainActivity
 import com.alexrotariu.finkeepy.ui.RecordAdapter
-import com.alexrotariu.finkeepy.ui.dashboard.RecordItemDecoration
-import javax.inject.Inject
 
 class RecordsFragment : Fragment() {
 
@@ -35,7 +33,6 @@ class RecordsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initObservers()
-        initSwipeListener()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
@@ -52,14 +49,6 @@ class RecordsFragment : Fragment() {
         getViewModel().records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
                 updateRecords(records)
-            }
-        }
-    }
-
-    private fun initSwipeListener() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            getViewModel().getRecords {
-                binding.swipeRefreshLayout.isRefreshing = false
             }
         }
     }

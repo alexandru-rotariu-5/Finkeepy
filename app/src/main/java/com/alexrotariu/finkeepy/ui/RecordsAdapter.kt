@@ -70,23 +70,25 @@ class RecordAdapter(private val limit: Int = 10_000) :
                 ContextCompat.getColor(binding.root.context, R.color.white)
             }
 
-            binding.tvNetWorth.setTextColor(textColor)
-            binding.tvIncome.setTextColor(textColor)
-            binding.tvExpense.setTextColor(textColor)
-            binding.tvCashflow.setTextColor(textColor)
+            with (binding) {
+                tvNetWorth.setTextColor(textColor)
+                tvIncome.setTextColor(textColor)
+                tvExpense.setTextColor(textColor)
+                tvCashflow.setTextColor(textColor)
 
-            if (record.timestamp.month == Month.DECEMBER && !isFirstItem) {
-                binding.llYear.visibility = View.VISIBLE
-                binding.tvYear.text = record.timestamp.plusYears(1).year.toString()
-            } else {
-                binding.llYear.visibility = View.GONE
+                if (record.timestamp.month == Month.DECEMBER && !isFirstItem) {
+                    llYear.visibility = View.VISIBLE
+                    tvYear.text = record.timestamp.plusYears(1).year.toString()
+                } else {
+                    llYear.visibility = View.GONE
+                }
+
+                tvMonth.text = dateFormat.format(record.timestamp)
+                tvNetWorth.text = record.netWorth.format()
+                tvIncome.text = record.income.format()
+                tvExpense.text = record.getExpense(previousNetWorth).format()
+                tvCashflow.text = record.getCashflow(previousNetWorth).format()
             }
-
-            binding.tvMonth.text = dateFormat.format(record.timestamp)
-            binding.tvNetWorth.text = record.netWorth.format()
-            binding.tvIncome.text = record.income.format()
-            binding.tvExpense.text = record.getExpense(previousNetWorth).format()
-            binding.tvCashflow.text = record.getCashflow(previousNetWorth).format()
         }
     }
 

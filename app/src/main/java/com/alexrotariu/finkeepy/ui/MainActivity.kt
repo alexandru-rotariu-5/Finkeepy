@@ -2,7 +2,9 @@ package com.alexrotariu.finkeepy.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
@@ -25,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setOnClickListeners()
+        initObservers()
+        setupSwipeRefresh()
+
     }
 
     private fun setOnClickListeners() {
@@ -34,6 +39,25 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomMenu.btnMenuRecords.setOnClickListener {
             openFragment(RecordsFragment())
+        }
+    }
+
+    private fun initObservers() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.pbLoadingIndicator.visibility = View.VISIBLE
+            } else {
+                binding.pbLoadingIndicator.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.turquoise))
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getRecords {
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
         }
     }
 
