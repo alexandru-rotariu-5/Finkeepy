@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="match_parent"
             android:indeterminateTint="@color/white"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <include
             android:id="@+id/bottom_menu"

@@ -12,6 +12,8 @@
 
     <!-- Dashboard -->
     <string name="last_month_cashflow">%1$s RON last month</string>
+    <string name="this_month_cashflow">%1$s RON this month</string>
+    <string name="month_cashflow">%1$s RON in %2$s</string>
     <string name="see_all_records">See all…</string>
     <string name="no_records_available">No records available.</string>
 

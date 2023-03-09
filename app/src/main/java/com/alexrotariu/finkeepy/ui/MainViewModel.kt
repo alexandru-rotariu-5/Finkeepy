@@ -67,5 +67,4 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
         }
         return entries
     }
-
 }

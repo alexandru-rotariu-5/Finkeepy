@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             if (isLoading) {
                 binding.pbLoadingIndicator.visibility = View.VISIBLE
             } else {
-                binding.pbLoadingIndicator.visibility = View.INVISIBLE
+                binding.pbLoadingIndicator.visibility = View.GONE
             }
         }
     }

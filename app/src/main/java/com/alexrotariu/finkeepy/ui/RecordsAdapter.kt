@@ -11,6 +11,7 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.ItemRecordBinding
 import com.alexrotariu.finkeepy.utils.format
+import com.alexrotariu.finkeepy.utils.getShortMonth
 import java.time.Month
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -55,8 +56,6 @@ class RecordAdapter(private val limit: Int = 10_000) :
     class RecordViewHolder(private val binding: ItemRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val dateFormat = DateTimeFormatter.ofPattern("MMM", Locale.getDefault())
-
         fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean) {
             binding.llRecordData.background = if (isFirstItem) {
                 ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_white)
@@ -83,7 +82,7 @@ class RecordAdapter(private val limit: Int = 10_000) :
                     llYear.visibility = View.GONE
                 }
 
-                tvMonth.text = dateFormat.format(record.timestamp)
+                tvMonth.text = record.timestamp.getShortMonth()
                 tvNetWorth.text = record.netWorth.format()
                 tvIncome.text = record.income.format()
                 tvExpense.text = record.getExpense(previousNetWorth).format()

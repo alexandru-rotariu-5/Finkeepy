@@ -18,14 +18,18 @@ import com.alexrotariu.finkeepy.ui.MainActivity
 import com.alexrotariu.finkeepy.ui.RecordAdapter
 import com.alexrotariu.finkeepy.ui.ValueType
 import com.alexrotariu.finkeepy.ui.records.RecordsFragment
+import com.alexrotariu.finkeepy.utils.StringUtils
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.formatDecimalString
 import com.alexrotariu.finkeepy.utils.split
+import com.alexrotariu.finkeepy.utils.capitalize
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import java.time.LocalDate
+import java.time.Year
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -56,7 +60,7 @@ class DashboardFragment : Fragment() {
     private fun getViewModel() = (activity as MainActivity).viewModel
 
     private fun setupGraph() {
-        with(binding.lcMainGraph) {
+        binding.lcMainGraph.apply {
             setupGraphXAxis()
 
             axisLeft.apply {
@@ -84,7 +88,7 @@ class DashboardFragment : Fragment() {
 
 
     private fun setupGraphXAxis() {
-        with(binding.lcMainGraph.xAxis) {
+        binding.lcMainGraph.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             setDrawGridLines(false)
             setDrawAxisLine(false)
@@ -102,7 +106,9 @@ class DashboardFragment : Fragment() {
         val index = value.toInt()
         if (index >= 0 && index < (getViewModel().records.value?.size ?: 0)) {
             val date = getViewModel().records.value?.reversed()?.get(index)?.timestamp
-            return date?.let { DateTimeFormatter.ofPattern("MMM yy", Locale.getDefault()).format(it) }
+            return date?.let {
+                DateTimeFormatter.ofPattern("MMM yy", Locale.getDefault()).format(it)
+            }
         }
         return ""
     }
@@ -111,19 +117,21 @@ class DashboardFragment : Fragment() {
     private fun updateGraphData(data: List<Entry>, label: ValueType) {
         val dataSet = LineDataSet(data, getString(label.labelResource))
 
-        dataSet.color = ContextCompat.getColor(requireContext(), R.color.white)
-        dataSet.setDrawCircles(false)
-        dataSet.setDrawValues(false)
-
-        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
-        dataSet.cubicIntensity = 0.2f
-        dataSet.lineWidth = 3f
+        dataSet.apply {
+            color = ContextCompat.getColor(requireContext(), R.color.white)
+            setDrawCircles(false)
+            setDrawValues(false)
+            mode = LineDataSet.Mode.CUBIC_BEZIER
+            cubicIntensity = 0.2f
+            lineWidth = 3f
+        }
 
         val lineData = LineData(dataSet)
 
         binding.lcMainGraph.data = lineData
         binding.lcMainGraph.invalidate()
     }
+
 
     private fun initRecordsAdapter() {
         recordAdapter = RecordAdapter(RECORDS_LIMIT)
@@ -156,12 +164,34 @@ class DashboardFragment : Fragment() {
     private fun updateNetWorthView(netWorth: Double) {
         binding.tvNetWorthWhole.text = netWorth.split().first.format()
         binding.tvNetWorthDecimal.text =
-            String.format(getString(R.string.decimal), netWorth.split().second.toString().formatDecimalString())
+            String.format(
+                getString(R.string.decimal),
+                netWorth.split().second.toString().formatDecimalString()
+            )
     }
 
     private fun updateLastMonthCashflowView(cashflow: Double) {
-        val text =
-            String.format(getString(R.string.last_month_cashflow), cashflow.split().first.format())
+        val firstRecord = getViewModel().records.value?.firstOrNull()
+
+        var text = StringUtils.EMPTY
+
+        if (firstRecord != null) {
+            text =
+                if (firstRecord.timestamp.year == Year.now().value && firstRecord.timestamp.month == LocalDate.now().month) {
+                    getString(R.string.this_month_cashflow, cashflow.split().first.format())
+                } else if (firstRecord.timestamp.year == Year.now().value && firstRecord.timestamp.month == LocalDate.now().month.minus(
+                        1
+                    )
+                ) {
+                    getString(R.string.last_month_cashflow, cashflow.split().first.format())
+                } else {
+                    getString(
+                        R.string.month_cashflow,
+                        cashflow.split().first.format(),
+                        firstRecord.timestamp.month.toString().capitalize()
+                    )
+                }
+        }
 
         val formattedText = SpannableStringBuilder(text)
 
