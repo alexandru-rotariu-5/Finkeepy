@@ -7,6 +7,11 @@ fun <T : Number> T.format(): String {
     return formatter.format(this)
 }
 
+fun Double.formatToTwoDecimals(): String {
+    val formatter = DecimalFormat("#,###,###.##")
+    return formatter.format(this.roundToTwoDecimals())
+}
+
 fun Double.split(): Pair<Int, Int> {
     val whole = this.toInt()
     val decimal = ((this - whole) * 100).toInt()
@@ -19,4 +24,8 @@ fun String.formatDecimalString(): String {
     } else {
         this
     }
+}
+
+fun Double.roundToTwoDecimals(): Double {
+    return (this * 100).toInt() / 100.0
 }

@@ -13,3 +13,7 @@ fun Timestamp.toLocalDateTime(): LocalDateTime {
 fun LocalDateTime.getShortMonth(): String {
     return DateTimeFormatter.ofPattern("MMM", Locale.getDefault()).format(this)
 }
+
+fun LocalDateTime.getShortMonthAndYear(): String {
+    return DateTimeFormatter.ofPattern("MMM yyyy", Locale.getDefault()).format(this)
+}

@@ -45,13 +45,12 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        initRecordsAdapter()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initRecordsAdapter()
         setupGraph()
         initObservers()
         initClickListeners()
@@ -134,7 +133,7 @@ class DashboardFragment : Fragment() {
 
 
     private fun initRecordsAdapter() {
-        recordAdapter = RecordAdapter(RECORDS_LIMIT)
+        recordAdapter = RecordAdapter(RECORDS_LIMIT, childFragmentManager)
         binding.rvRecords.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recordAdapter

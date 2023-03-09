@@ -4,6 +4,7 @@
     <!-- General -->
     <string name="currency_ron">RON</string>
     <string name="currency_euro">EUR</string>
+    <string name="amount_with_currency">%1$s %2$s</string>
     <string name="decimal">.%1$s</string>
     <string name="net_worth">Net worth</string>
     <string name="income">Income</string>
@@ -19,5 +20,10 @@
 
     <!-- Records -->
     <string name="my_data">My data</string>
+
+    <!-- Record details -->
+    <string name="earned">Earned</string>
+    <string name="spent">Spent</string>
+    <string name="total_cashflow">Total cashflow</string>
 
 </resources>

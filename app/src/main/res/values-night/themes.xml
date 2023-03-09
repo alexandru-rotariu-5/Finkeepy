@@ -6,8 +6,8 @@
         <item name="colorPrimaryVariant">@color/turquoise</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/turquoise_light</item>
-        <item name="colorSecondaryVariant">@color/turquoise_light</item>
+        <item name="colorSecondary">@color/turquoise_transparent</item>
+        <item name="colorSecondaryVariant">@color/turquoise_transparent</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>

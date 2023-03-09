@@ -4,19 +4,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.ItemRecordBinding
+import com.alexrotariu.finkeepy.ui.records.RecordBottomSheet
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.getShortMonth
 import java.time.Month
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
-class RecordAdapter(private val limit: Int = 10_000) :
+
+class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager: FragmentManager) :
     ListAdapter<Record, RecordAdapter.RecordViewHolder>(
         RecordDiffCallback()
     ) {
@@ -49,14 +50,14 @@ class RecordAdapter(private val limit: Int = 10_000) :
 
             val previousNetWorth = fullList.getOrNull(position + 1)?.netWorth ?: 0.0
 
-            holder.bind(record!!, previousNetWorth, position == 0)
+            holder.bind(record!!, previousNetWorth, position == 0, fragmentManager)
         }
     }
 
     class RecordViewHolder(private val binding: ItemRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean) {
+        fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean, fragmentManager: FragmentManager) {
             binding.llRecordData.background = if (isFirstItem) {
                 ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_white)
             } else {
@@ -88,6 +89,15 @@ class RecordAdapter(private val limit: Int = 10_000) :
                 tvExpense.text = record.getExpense(previousNetWorth).format()
                 tvCashflow.text = record.getCashflow(previousNetWorth).format()
             }
+
+            binding.llRecordData.setOnClickListener {
+                onRecordClick(record, previousNetWorth, fragmentManager)
+            }
+        }
+
+        private fun onRecordClick(record: Record, previousNetWorth: Double, fragmentManager: FragmentManager) {
+            val bottomSheet = RecordBottomSheet(record, previousNetWorth)
+            bottomSheet.show(fragmentManager, bottomSheet.tag)
         }
     }
 

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recordBottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_bottom_sheet_record"
+    android:padding="20dp">
+
+    <!-- Month -->
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/bold"
+        android:textAlignment="textEnd"
+        android:textColor="@color/turquoise"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Feb 2023" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCashflowGraph"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDate">
+
+        <TextView
+            android:id="@+id/tvIncomeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="@string/earned"
+            android:textColor="@color/turquoise"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tvIncomeValue"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvIncomeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/turquoise"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/vIncome"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="7500 RON" />
+
+        <View
+            android:id="@+id/vIncome"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_record_cashflow_graph_income"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/vExpense"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvExpenseLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="@string/spent"
+            android:textColor="@color/turquoise"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tvExpenseValue"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvExpenseValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/turquoise"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/vExpense"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="4000 RON" />
+
+        <View
+            android:id="@+id/vExpense"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="-40dp"
+            android:background="@drawable/bg_record_cashflow_graph_expense"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/vIncome" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvTotalCashflowLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/regular"
+        android:text="@string/total_cashflow"
+        android:textColor="@color/turquoise"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clCashflowGraph" />
+
+    <TextView
+        android:id="@+id/tvTotalCashflowValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/turquoise"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalCashflowLabel"
+        tools:text="3,500 RON" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,20 +25,19 @@ class RecordsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRecordsBinding.inflate(inflater, container, false)
-        initRecordsAdapter()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initRecordsAdapter()
         initObservers()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
 
     private fun initRecordsAdapter() {
-        recordAdapter = RecordAdapter()
+        recordAdapter = RecordAdapter(fragmentManager = childFragmentManager)
         binding.rvRecords.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recordAdapter
