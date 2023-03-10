@@ -24,6 +24,7 @@
     <!-- Record details -->
     <string name="earned">Earned</string>
     <string name="spent">Spent</string>
-    <string name="total_cashflow">Total cashflow</string>
+    <string name="your_net_worth_increased_by">Your net worth increased by</string>
+    <string name="your_net_worth_decreased_by">Your net worth decreased by</string>
 
 </resources>

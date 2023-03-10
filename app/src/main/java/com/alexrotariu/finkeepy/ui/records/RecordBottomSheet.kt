@@ -9,6 +9,7 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.BottomSheetRecordBinding
 import com.alexrotariu.finkeepy.utils.LayoutUtils
+import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.formatToTwoDecimals
 import com.alexrotariu.finkeepy.utils.getShortMonthAndYear
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -63,10 +64,12 @@ class RecordBottomSheet(
     }
 
     private fun setupCashflowGraph() {
+        val netWorth = record.netWorth
         val income = record.income
         val expense = record.getExpense(previousNetWorth)
+        val cashflow = record.getCashflow(previousNetWorth)
 
-        val max: Double = income.coerceAtLeast(record.getExpense(previousNetWorth))
+        val max: Double = income.coerceAtLeast(expense)
 
         val ratio = (if (max == income) expense else income) / max
 
@@ -85,19 +88,27 @@ class RecordBottomSheet(
 
         binding.tvIncomeValue.text = String.format(
             getString(R.string.amount_with_currency),
-            income.formatToTwoDecimals(),
+            income.format(),
             getString(R.string.currency_ron)
         )
 
         binding.tvExpenseValue.text = String.format(
             getString(R.string.amount_with_currency),
-            expense.formatToTwoDecimals(),
+            expense.format(),
             getString(R.string.currency_ron)
         )
 
-        binding.tvTotalCashflowValue.text = getString(
+        binding.tvCashflowLabel.text = getString(
+            if (cashflow > 0) R.string.your_net_worth_increased_by else R.string.your_net_worth_decreased_by
+        )
+
+        binding.tvCashflowValue.setBackgroundResource(
+            if (cashflow > 0) R.drawable.bg_text_rounded_green else R.drawable.bg_text_rounded_red
+        )
+
+        binding.tvCashflowValue.text = getString(
             R.string.amount_with_currency,
-            record.getCashflow(previousNetWorth).formatToTwoDecimals(),
+            cashflow.format(),
             getString(R.string.currency_ron)
         )
 
