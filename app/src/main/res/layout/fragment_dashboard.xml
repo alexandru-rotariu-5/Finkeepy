@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary">
+    android:background="@color/color_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clNetWorth"
@@ -18,14 +18,16 @@
             android:id="@+id/tvNetWorthWhole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="44dp"
             android:fontFamily="@font/bold"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="60sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="6,500" />
 
         <TextView
@@ -35,7 +37,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/bold"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/tvNetWorthWhole"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +50,7 @@
             android:layout_marginStart="4dp"
             android:fontFamily="@font/light"
             android:text="@string/currency_ron"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/tvNetWorthWhole"
             app:layout_constraintTop_toBottomOf="@id/tvNetWorthDecimal" />
@@ -60,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:src="@drawable/ic_double_arrow_up"
+        android:src="@drawable/ic_double_arrow_up_primary"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/tvLastMonthCashflow"
         app:layout_constraintHorizontal_bias="0.5"
@@ -74,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/regular"
-        android:textColor="@color/white"
+        android:textColor="@color/primary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -123,7 +125,7 @@
         android:focusable="true"
         android:fontFamily="@font/bold"
         android:text="@string/see_all_records"
-        android:textColor="@color/white"
+        android:textColor="@color/primary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

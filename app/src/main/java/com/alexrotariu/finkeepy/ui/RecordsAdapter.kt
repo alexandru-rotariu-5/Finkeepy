@@ -59,15 +59,15 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
 
         fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean, fragmentManager: FragmentManager) {
             binding.llRecordData.background = if (isFirstItem) {
-                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_white)
+                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_primary)
             } else {
-                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data)
+                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_white)
             }
 
             val textColor = if (isFirstItem) {
-                ContextCompat.getColor(binding.root.context, R.color.primary)
-            } else {
                 ContextCompat.getColor(binding.root.context, R.color.white)
+            } else {
+                ContextCompat.getColor(binding.root.context, R.color.primary)
             }
 
             with (binding) {

@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/bold"
-            android:textColor="@color/green"
+            android:textColor="@color/color_profit"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/vIncome"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/bold"
-            android:textColor="@color/red"
+            android:textColor="@color/color_loss"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/vExpense"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,14 +145,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvCashflowLabel"
-        android:background="@drawable/bg_text_rounded_green"
+        android:background="@drawable/bg_text_rounded_profit"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/ivCashflowArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_double_arrow_up" />
+            android:src="@drawable/ic_double_arrow_up_white" />
 
         <TextView
             android:id="@+id/tvCashflowValue"

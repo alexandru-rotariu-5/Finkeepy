@@ -81,7 +81,7 @@ class DashboardFragment : Fragment() {
             isHighlightPerDragEnabled = false
 
             setNoDataText(getString(R.string.no_records_available))
-            setNoDataTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setNoDataTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
         }
     }
 
@@ -97,7 +97,7 @@ class DashboardFragment : Fragment() {
                 override fun getFormattedValue(value: Float): String? =
                     formatGraphLabelToDate(value)
             }
-            textColor = ContextCompat.getColor(requireContext(), R.color.white)
+            textColor = ContextCompat.getColor(requireContext(), R.color.primary)
         }
     }
 
@@ -117,7 +117,7 @@ class DashboardFragment : Fragment() {
         val dataSet = LineDataSet(data, getString(label.labelResource))
 
         dataSet.apply {
-            color = ContextCompat.getColor(requireContext(), R.color.white)
+            color = ContextCompat.getColor(requireContext(), R.color.primary)
             setDrawCircles(false)
             setDrawValues(false)
             mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -206,9 +206,9 @@ class DashboardFragment : Fragment() {
         binding.ivCashflowArrow.visibility = View.VISIBLE
 
         if (cashflow < 0) {
-            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_down)
+            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_down_primary)
         } else if (cashflow > 0) {
-            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_up)
+            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_up_primary)
         } else {
             binding.ivCashflowArrow.visibility = View.GONE
         }

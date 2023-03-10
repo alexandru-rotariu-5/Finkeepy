@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- General -->
     <color name="primary">#FFFF914D</color>
     <color name="primary_transparent">#80FF914D</color>
+    <color name="secondary">#FFFFC099</color>
+    <color name="secondary_transparent">#80FFC099</color>
+
     <color name="green">#1ECCA9</color>
     <color name="red">#F679A4</color>
     <color name="black">#FF000000</color>
     <color name="dark_grey">#323232</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_transparent">#80FFFFFF</color>
+    <color name="color_background">@color/white</color>
+
+    <!-- Record -->
+    <color name="color_profit">@color/primary</color>
+    <color name="color_loss">@color/secondary</color>
 </resources>

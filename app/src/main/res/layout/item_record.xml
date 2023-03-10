@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary">
+    android:background="@color/color_background">
 
     <LinearLayout
         android:id="@+id/llYear"
@@ -12,6 +12,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         android:gravity="center"
+        android:paddingBottom="12dp"
         android:paddingHorizontal="20dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@color/white_transparent" />
+            android:background="@color/primary" />
 
         <TextView
             android:id="@+id/tvYear"
@@ -31,9 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:fontFamily="@font/bold"
-            android:layout_marginBottom="4dp"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="16sp"
             tools:text="2023" />
 
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@color/white_transparent" />
+            android:background="@color/primary" />
 
     </LinearLayout>
 
@@ -65,7 +65,7 @@
             android:fontFamily="@font/bold"
             android:layout_marginBottom="4dp"
             android:textAlignment="textEnd"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="24sp"
             tools:text="Feb" />
 
@@ -79,7 +79,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="12dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_record_data"
+            android:background="@drawable/bg_record_data_primary"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:elevation="6dp"

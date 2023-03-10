@@ -112,7 +112,7 @@ class RecordBottomSheet(
             )
 
             llCashflow.setBackgroundResource(
-                if (cashflow > 0) R.drawable.bg_text_rounded_green else R.drawable.bg_text_rounded_red
+                if (cashflow > 0) R.drawable.bg_text_rounded_profit else R.drawable.bg_text_rounded_loss
             )
 
             tvCashflowValue.text = getString(
@@ -123,9 +123,9 @@ class RecordBottomSheet(
 
             ivCashflowArrow.apply {
                 if (cashflow < 0) {
-                    setImageResource(R.drawable.ic_double_arrow_down)
+                    setImageResource(R.drawable.ic_double_arrow_down_white)
                 } else if (cashflow > 0) {
-                    setImageResource(R.drawable.ic_double_arrow_up)
+                    setImageResource(R.drawable.ic_double_arrow_up_white)
                 } else {
                     visibility = View.GONE
                 }
