@@ -173,20 +173,21 @@ class DashboardFragment : Fragment() {
         val firstRecord = getViewModel().records.value?.firstOrNull()
 
         var text = StringUtils.EMPTY
+        val formattedCashflow = cashflow.split().first.format()
 
         if (firstRecord != null) {
             text =
                 if (firstRecord.timestamp.year == Year.now().value && firstRecord.timestamp.month == LocalDate.now().month) {
-                    getString(R.string.this_month_cashflow, cashflow.split().first.format())
+                    getString(R.string.this_month_cashflow, formattedCashflow)
                 } else if (firstRecord.timestamp.year == Year.now().value && firstRecord.timestamp.month == LocalDate.now().month.minus(
                         1
                     )
                 ) {
-                    getString(R.string.last_month_cashflow, cashflow.split().first.format())
+                    getString(R.string.last_month_cashflow, formattedCashflow)
                 } else {
                     getString(
                         R.string.month_cashflow,
-                        cashflow.split().first.format(),
+                        formattedCashflow,
                         firstRecord.timestamp.month.toString().capitalize()
                     )
                 }
@@ -205,7 +206,11 @@ class DashboardFragment : Fragment() {
         binding.ivCashflowArrow.visibility = View.VISIBLE
 
         if (cashflow < 0) {
-            binding.ivCashflowArrow.rotation = 180f
+            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_down)
+        } else if (cashflow > 0) {
+            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_up)
+        } else {
+            binding.ivCashflowArrow.visibility = View.GONE
         }
     }
 

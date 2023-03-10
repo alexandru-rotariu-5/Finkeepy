@@ -10,7 +10,6 @@ import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.BottomSheetRecordBinding
 import com.alexrotariu.finkeepy.utils.LayoutUtils
 import com.alexrotariu.finkeepy.utils.format
-import com.alexrotariu.finkeepy.utils.formatToTwoDecimals
 import com.alexrotariu.finkeepy.utils.getShortMonthAndYear
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -60,14 +59,14 @@ class RecordBottomSheet(
 
     private fun initViews() {
         binding.tvDate.text = record.timestamp.getShortMonthAndYear()
+        setupNetWorthView()
         setupCashflowGraph()
+        setupCashflowViews()
     }
 
     private fun setupCashflowGraph() {
-        val netWorth = record.netWorth
         val income = record.income
         val expense = record.getExpense(previousNetWorth)
-        val cashflow = record.getCashflow(previousNetWorth)
 
         val max: Double = income.coerceAtLeast(expense)
 
@@ -98,11 +97,18 @@ class RecordBottomSheet(
             getString(R.string.currency_ron)
         )
 
+        binding.vIncome.requestLayout()
+        binding.vExpense.requestLayout()
+    }
+
+    private fun setupCashflowViews() {
+        val cashflow = record.getCashflow(previousNetWorth)
+
         binding.tvCashflowLabel.text = getString(
             if (cashflow > 0) R.string.your_net_worth_increased_by else R.string.your_net_worth_decreased_by
         )
 
-        binding.tvCashflowValue.setBackgroundResource(
+        binding.llCashflow.setBackgroundResource(
             if (cashflow > 0) R.drawable.bg_text_rounded_green else R.drawable.bg_text_rounded_red
         )
 
@@ -112,7 +118,22 @@ class RecordBottomSheet(
             getString(R.string.currency_ron)
         )
 
-        binding.vIncome.requestLayout()
-        binding.vExpense.requestLayout()
+        if (cashflow < 0) {
+            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_down)
+        } else if (cashflow > 0) {
+            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_up)
+        } else {
+            binding.ivCashflowArrow.visibility = View.GONE
+        }
+    }
+
+    private fun setupNetWorthView() {
+        val netWorth = record.netWorth
+
+        binding.tvNetWorth.text = getString(
+            R.string.amount_with_currency,
+            netWorth.format(),
+            getString(R.string.currency_ron)
+        )
     }
 }
