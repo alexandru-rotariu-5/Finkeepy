@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.Finkeepy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/turquoise</item>
-        <item name="colorPrimaryVariant">@color/turquoise</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/turquoise_transparent</item>
-        <item name="colorSecondaryVariant">@color/turquoise_transparent</item>
+        <item name="colorSecondary">@color/primary_transparent</item>
+        <item name="colorSecondaryVariant">@color/primary_transparent</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>

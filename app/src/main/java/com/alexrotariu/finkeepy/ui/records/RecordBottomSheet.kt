@@ -76,54 +76,60 @@ class RecordBottomSheet(
             (CASHFLOW_GRAPH_HEIGHT * LayoutUtils.getDpToPx(binding.root.context)).toInt()
         val minHeight = (ratio * maxHeight).toInt()
 
-        binding.vIncome.layoutParams.height = if (income > expense) maxHeight else minHeight
-        binding.vExpense.layoutParams.height = if (expense > income) maxHeight else minHeight
+        binding.apply {
+            vIncome.layoutParams.height = if (income > expense) maxHeight else minHeight
+            vExpense.layoutParams.height = if (expense > income) maxHeight else minHeight
 
-        if (income >= expense) {
-            binding.vExpense.bringToFront()
-        } else {
-            binding.vIncome.bringToFront()
+            if (income >= expense) {
+                vExpense.bringToFront()
+            } else {
+                vIncome.bringToFront()
+            }
+
+            tvIncomeValue.text = String.format(
+                getString(R.string.amount_with_currency),
+                income.format(),
+                getString(R.string.currency_ron)
+            )
+
+            tvExpenseValue.text = String.format(
+                getString(R.string.amount_with_currency),
+                expense.format(),
+                getString(R.string.currency_ron)
+            )
+
+            vIncome.requestLayout()
+            vExpense.requestLayout()
         }
-
-        binding.tvIncomeValue.text = String.format(
-            getString(R.string.amount_with_currency),
-            income.format(),
-            getString(R.string.currency_ron)
-        )
-
-        binding.tvExpenseValue.text = String.format(
-            getString(R.string.amount_with_currency),
-            expense.format(),
-            getString(R.string.currency_ron)
-        )
-
-        binding.vIncome.requestLayout()
-        binding.vExpense.requestLayout()
     }
 
     private fun setupCashflowViews() {
         val cashflow = record.getCashflow(previousNetWorth)
 
-        binding.tvCashflowLabel.text = getString(
-            if (cashflow > 0) R.string.your_net_worth_increased_by else R.string.your_net_worth_decreased_by
-        )
+        binding.apply {
+            tvCashflowLabel.text = getString(
+                if (cashflow > 0) R.string.your_net_worth_increased_by else R.string.your_net_worth_decreased_by
+            )
 
-        binding.llCashflow.setBackgroundResource(
-            if (cashflow > 0) R.drawable.bg_text_rounded_green else R.drawable.bg_text_rounded_red
-        )
+            llCashflow.setBackgroundResource(
+                if (cashflow > 0) R.drawable.bg_text_rounded_green else R.drawable.bg_text_rounded_red
+            )
 
-        binding.tvCashflowValue.text = getString(
-            R.string.amount_with_currency,
-            cashflow.format(),
-            getString(R.string.currency_ron)
-        )
+            tvCashflowValue.text = getString(
+                R.string.amount_with_currency,
+                cashflow.format(),
+                getString(R.string.currency_ron)
+            )
 
-        if (cashflow < 0) {
-            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_down)
-        } else if (cashflow > 0) {
-            binding.ivCashflowArrow.setImageResource(R.drawable.ic_double_arrow_up)
-        } else {
-            binding.ivCashflowArrow.visibility = View.GONE
+            ivCashflowArrow.apply {
+                if (cashflow < 0) {
+                    setImageResource(R.drawable.ic_double_arrow_down)
+                } else if (cashflow > 0) {
+                    setImageResource(R.drawable.ic_double_arrow_up)
+                } else {
+                    visibility = View.GONE
+                }
+            }
         }
     }
 

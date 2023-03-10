@@ -65,7 +65,7 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
             }
 
             val textColor = if (isFirstItem) {
-                ContextCompat.getColor(binding.root.context, R.color.turquoise)
+                ContextCompat.getColor(binding.root.context, R.color.primary)
             } else {
                 ContextCompat.getColor(binding.root.context, R.color.white)
             }

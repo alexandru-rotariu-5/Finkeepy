@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="turquoise">#FF1B8381</color>
-    <color name="turquoise_transparent">#801B8381</color>
+    <color name="primary">#FFFF914D</color>
+    <color name="primary_transparent">#80FF914D</color>
     <color name="green">#1ECCA9</color>
     <color name="red">#F679A4</color>
     <color name="black">#FF000000</color>

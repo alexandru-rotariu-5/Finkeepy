@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             android:padding="170dp"
-            android:background="@color/turquoise_transparent"
+            android:background="@color/primary_transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -3,7 +3,6 @@ package com.alexrotariu.finkeepy.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alexrotariu.finkeepy.App
@@ -11,7 +10,6 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
 import com.alexrotariu.finkeepy.ui.dashboard.DashboardFragment
 import com.alexrotariu.finkeepy.ui.records.RecordsFragment
-import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSwipeRefresh() {
-        binding.swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.turquoise))
+        binding.swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.primary))
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getRecords {
                 binding.swipeRefreshLayout.isRefreshing = false
