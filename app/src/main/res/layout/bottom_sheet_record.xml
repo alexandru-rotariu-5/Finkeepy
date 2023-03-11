@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_bottom_sheet_record"
-    android:paddingTop="20dp"
     android:paddingHorizontal="20dp"
+    android:paddingTop="20dp"
     android:paddingBottom="40dp">
 
     <!-- Month -->
@@ -120,8 +120,8 @@
         android:id="@+id/vCashflowGraphSeparator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/clCashflowGraph"
-        android:background="@color/dark_grey"/>
+        android:background="@color/dark_grey"
+        app:layout_constraintTop_toBottomOf="@id/clCashflowGraph" />
 
     <TextView
         android:id="@+id/tvCashflowLabel"
@@ -141,12 +141,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@drawable/bg_text_rounded_profit"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCashflowLabel"
-        android:background="@drawable/bg_text_rounded_profit"
-        android:orientation="horizontal">
+        app:layout_constraintTop_toBottomOf="@id/tvCashflowLabel">
 
         <ImageView
             android:id="@+id/ivCashflowArrow"

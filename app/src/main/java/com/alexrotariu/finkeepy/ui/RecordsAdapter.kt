@@ -50,14 +50,17 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
 
             val previousNetWorth = fullList.getOrNull(position + 1)?.netWorth ?: 0.0
 
-            holder.bind(record!!, previousNetWorth, position == 0, fragmentManager)
+            holder.bind(record!!, previousNetWorth, position, fragmentManager)
         }
     }
 
     class RecordViewHolder(private val binding: ItemRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(record: Record, previousNetWorth: Double, isFirstItem: Boolean, fragmentManager: FragmentManager) {
+        fun bind(record: Record, previousNetWorth: Double, position: Int, fragmentManager: FragmentManager) {
+
+            val isFirstItem = position == 0
+
             binding.llRecordData.background = if (isFirstItem) {
                 ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_primary)
             } else {

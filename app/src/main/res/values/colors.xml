@@ -4,8 +4,8 @@
     <!-- General -->
     <color name="primary">#FFFF914D</color>
     <color name="primary_transparent">#80FF914D</color>
-    <color name="secondary">#FFFFC099</color>
-    <color name="secondary_transparent">#80FFC099</color>
+    <color name="primary_light">#FFFFC099</color>
+    <color name="primary_light_transparent">#80FFC099</color>
 
     <color name="green">#1ECCA9</color>
     <color name="red">#F679A4</color>
@@ -17,5 +17,5 @@
 
     <!-- Record -->
     <color name="color_profit">@color/primary</color>
-    <color name="color_loss">@color/secondary</color>
+    <color name="color_loss">@color/primary_light</color>
 </resources>
