@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@color/primary" />
+            android:background="@color/dark_grey" />
 
         <TextView
             android:id="@+id/tvYear"
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@color/primary" />
+            android:background="@color/dark_grey" />
 
     </LinearLayout>
 

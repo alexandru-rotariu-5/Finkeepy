@@ -57,15 +57,15 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
     class RecordViewHolder(private val binding: ItemRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(record: Record, previousNetWorth: Double, position: Int, fragmentManager: FragmentManager) {
+        fun bind(
+            record: Record,
+            previousNetWorth: Double,
+            position: Int,
+            fragmentManager: FragmentManager
+        ) {
 
             val isFirstItem = position == 0
-
-            binding.llRecordData.background = if (isFirstItem) {
-                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_primary)
-            } else {
-                ContextCompat.getDrawable(binding.root.context, R.drawable.bg_record_data_white)
-            }
+            val cashflow = record.getCashflow(previousNetWorth)
 
             val textColor = if (isFirstItem) {
                 ContextCompat.getColor(binding.root.context, R.color.white)
@@ -73,7 +73,15 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
                 ContextCompat.getColor(binding.root.context, R.color.primary)
             }
 
-            with (binding) {
+            with(binding) {
+                llRecordData.background = ContextCompat.getDrawable(
+                    binding.root.context, if (isFirstItem) {
+                        if (cashflow > 0) R.drawable.bg_record_data_primary_border else R.drawable.bg_record_data_primary
+                    } else {
+                        if (cashflow > 0) R.drawable.bg_record_data_white_border else R.drawable.bg_record_data_white
+                    }
+                )
+
                 tvNetWorth.setTextColor(textColor)
                 tvIncome.setTextColor(textColor)
                 tvExpense.setTextColor(textColor)
@@ -91,14 +99,18 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
                 tvIncome.text = record.income.format()
                 tvExpense.text = record.getExpense(previousNetWorth).format()
                 tvCashflow.text = record.getCashflow(previousNetWorth).format()
-            }
 
-            binding.llRecordData.setOnClickListener {
-                onRecordClick(record, previousNetWorth, fragmentManager)
+                llRecordData.setOnClickListener {
+                    onRecordClick(record, previousNetWorth, fragmentManager)
+                }
             }
         }
 
-        private fun onRecordClick(record: Record, previousNetWorth: Double, fragmentManager: FragmentManager) {
+        private fun onRecordClick(
+            record: Record,
+            previousNetWorth: Double,
+            fragmentManager: FragmentManager
+        ) {
             val bottomSheet = RecordBottomSheet(record, previousNetWorth)
             bottomSheet.show(fragmentManager, bottomSheet.tag)
         }
