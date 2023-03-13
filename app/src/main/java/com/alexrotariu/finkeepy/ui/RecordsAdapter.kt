@@ -76,9 +76,9 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
             with(binding) {
                 llRecordData.background = ContextCompat.getDrawable(
                     binding.root.context, if (isFirstItem) {
-                        if (cashflow > 0) R.drawable.bg_record_data_primary_border else R.drawable.bg_record_data_primary
+                        R.drawable.bg_record_data_primary
                     } else {
-                        if (cashflow > 0) R.drawable.bg_record_data_white_border else R.drawable.bg_record_data_white
+                        R.drawable.bg_record_data_white
                     }
                 )
 
