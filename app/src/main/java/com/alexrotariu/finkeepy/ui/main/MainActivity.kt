@@ -3,6 +3,7 @@ package com.alexrotariu.finkeepy.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
@@ -11,7 +12,9 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
 import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
 import com.alexrotariu.finkeepy.ui.main.data.DataFragment
+import com.alexrotariu.finkeepy.ui.main.graphs.GraphsFragment
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
+import com.google.common.graph.Graph
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -26,10 +29,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
         setOnClickListeners()
         initObservers()
         setupSwipeRefresh()
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                if (currentFragment is DashboardFragment) {
+                    finish()
+                } else {
+                    openFragment(DashboardFragment())
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun setOnClickListeners() {
@@ -39,6 +56,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomMenu.btnMenuRecords.setOnClickListener {
             openFragment(RecordsFragment())
+        }
+
+        binding.bottomMenu.btnMenuGraphs.setOnClickListener {
+            openFragment(GraphsFragment())
         }
     }
 
