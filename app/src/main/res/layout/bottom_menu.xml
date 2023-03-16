@@ -33,6 +33,15 @@
         android:src="@drawable/ic_graphs" />
 
     <ImageButton
+        android:id="@+id/btnMenuData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/bg_bottom_menu_button"
+        android:padding="20dp"
+        android:src="@drawable/ic_data" />
+
+    <ImageButton
         android:id="@+id/btnMenuSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

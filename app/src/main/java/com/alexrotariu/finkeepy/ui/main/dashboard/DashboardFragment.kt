@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui.dashboard
+package com.alexrotariu.finkeepy.ui.main.dashboard
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
-import com.alexrotariu.finkeepy.ui.MainActivity
-import com.alexrotariu.finkeepy.ui.RecordAdapter
-import com.alexrotariu.finkeepy.ui.ValueType
-import com.alexrotariu.finkeepy.ui.records.RecordsFragment
+import com.alexrotariu.finkeepy.ui.main.MainActivity
+import com.alexrotariu.finkeepy.ui.main.records.RecordAdapter
+import com.alexrotariu.finkeepy.ui.models.ValueType
+import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
 import com.alexrotariu.finkeepy.utils.StringUtils
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.formatDecimalString
@@ -65,7 +65,8 @@ class DashboardFragment : Fragment() {
             axisLeft.apply {
                 setDrawGridLines(false)
                 setDrawAxisLine(false)
-                setDrawLabels(false)
+                setDrawLabels(true)
+                textColor = ContextCompat.getColor(requireContext(), R.color.primary)
             }
 
             axisRight.apply {

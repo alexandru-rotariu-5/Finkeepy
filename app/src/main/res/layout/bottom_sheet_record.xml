@@ -145,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/bg_text_rounded_profit"
+        android:background="@drawable/bg_rounded_primary"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"

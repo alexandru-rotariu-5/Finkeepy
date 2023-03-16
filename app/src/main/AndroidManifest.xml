@@ -17,7 +17,7 @@
         android:theme="@style/Theme.FinkeepySplash"
         tools:targetApi="31">
         <activity
-            android:name="com.alexrotariu.finkeepy.ui.MainActivity"
+            android:name="com.alexrotariu.finkeepy.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

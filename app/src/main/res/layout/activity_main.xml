@@ -5,13 +5,13 @@
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.dashboard.DashboardFragment">
+    tools:context=".ui.main.dashboard.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_background"
-        tools:context="com.alexrotariu.finkeepy.ui.MainActivity">
+        tools:context="com.alexrotariu.finkeepy.ui.main.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -23,7 +23,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/nav_graph" />
+            app:navGraph="@navigation/main_nav_graph" />
 
         <ProgressBar
             android:id="@+id/pbLoadingIndicator"

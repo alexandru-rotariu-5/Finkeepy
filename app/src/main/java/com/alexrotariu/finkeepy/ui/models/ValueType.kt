@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui
+package com.alexrotariu.finkeepy.ui.models
 
 import com.alexrotariu.finkeepy.R
 

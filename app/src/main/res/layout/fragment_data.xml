@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background"
+    tools:context=".ui.main.data.DataFragment">
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/topMenu"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/bg_data_top_menu"-->
+<!--        android:elevation="8dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btnMenuRecords"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/bg_data_top_menu_button"-->
+<!--            android:clickable="true"-->
+<!--            android:layout_weight="1"-->
+<!--            android:focusable="true"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="20dp">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/ivRecords"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:paddingHorizontal="8dp"-->
+<!--                android:src="@drawable/ic_records_primary" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvRecords"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/bold"-->
+<!--                android:textColor="@color/dark_grey"-->
+<!--                android:textSize="16sp"-->
+<!--                android:text="@string/records" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btnMenuFigures"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/bg_data_top_menu_button"-->
+<!--            android:clickable="true"-->
+<!--            android:layout_weight="1"-->
+<!--            android:focusable="true"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="20dp">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/ivFigures"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:paddingHorizontal="8dp"-->
+<!--                android:src="@drawable/ic_figures" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvFigures"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/bold"-->
+<!--                android:textColor="@color/dark_grey"-->
+<!--                android:textSize="16sp"-->
+<!--                android:text="@string/figures" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,12 +19,17 @@
     <string name="no_records_available">No records available.</string>
 
     <!-- Records -->
-    <string name="my_data">My data</string>
+    <string name="records">Records</string>
 
     <!-- Record details -->
     <string name="earned">Earned</string>
     <string name="spent">Spent</string>
     <string name="your_net_worth_increased_by">Your net worth increased by</string>
     <string name="your_net_worth_decreased_by">Your net worth decreased by</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Data -->
+    <string name="data">Data</string>
 
 </resources>

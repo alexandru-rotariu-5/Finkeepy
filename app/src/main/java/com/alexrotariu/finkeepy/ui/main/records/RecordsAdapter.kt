@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui
+package com.alexrotariu.finkeepy.ui.main.records
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.ItemRecordBinding
-import com.alexrotariu.finkeepy.ui.records.RecordBottomSheet
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.getShortMonth
 import java.time.Month
@@ -65,13 +64,18 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
         ) {
 
             val isFirstItem = position == 0
+
             val cashflow = record.getCashflow(previousNetWorth)
 
-            val textColor = if (isFirstItem) {
-                ContextCompat.getColor(binding.root.context, R.color.white)
-            } else {
-                ContextCompat.getColor(binding.root.context, R.color.primary)
-            }
+            val primaryTextColor = ContextCompat.getColor(
+                binding.root.context,
+                if (isFirstItem) R.color.white else R.color.primary
+            )
+
+            val secondaryTextColor = ContextCompat.getColor(
+                binding.root.context,
+                if (isFirstItem) R.color.white else R.color.primary_light
+            )
 
             with(binding) {
                 llRecordData.background = ContextCompat.getDrawable(
@@ -82,10 +86,10 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
                     }
                 )
 
-                tvNetWorth.setTextColor(textColor)
-                tvIncome.setTextColor(textColor)
-                tvExpense.setTextColor(textColor)
-                tvCashflow.setTextColor(textColor)
+                tvNetWorth.setTextColor(primaryTextColor)
+                tvIncome.setTextColor(primaryTextColor)
+                tvExpense.setTextColor(secondaryTextColor)
+                tvCashflow.setTextColor(if (cashflow > 0) primaryTextColor else secondaryTextColor)
 
                 if (record.timestamp.month == Month.DECEMBER && !isFirstItem) {
                     llYear.visibility = View.VISIBLE

@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui
+package com.alexrotariu.finkeepy.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
-import com.alexrotariu.finkeepy.ui.dashboard.DashboardFragment
-import com.alexrotariu.finkeepy.ui.records.RecordsFragment
+import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
+import com.alexrotariu.finkeepy.ui.main.data.DataFragment
+import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui
+package com.alexrotariu.finkeepy.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.data.repositories.RecordsRepository
+import com.alexrotariu.finkeepy.ui.models.ValueType
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.launch
 import javax.inject.Inject

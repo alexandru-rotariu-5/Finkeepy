@@ -1,17 +1,14 @@
-package com.alexrotariu.finkeepy.ui.records
+package com.alexrotariu.finkeepy.ui.main.records
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentRecordsBinding
-import com.alexrotariu.finkeepy.ui.MainActivity
-import com.alexrotariu.finkeepy.ui.RecordAdapter
+import com.alexrotariu.finkeepy.ui.main.MainActivity
 
 class RecordsFragment : Fragment() {
 

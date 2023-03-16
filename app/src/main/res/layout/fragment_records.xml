@@ -4,20 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_background">
-
-    <TextView
-        android:id="@+id/tvRecords"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/bold"
-        android:text="@string/my_data"
-        android:textColor="@color/primary"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@color/color_background"
+    tools:context=".ui.main.records.RecordsFragment">
 
     <include
         android:id="@+id/lRecordsLabels"
@@ -29,7 +17,7 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRecords" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecords"
@@ -37,21 +25,11 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
-        android:paddingTop="20dp"
         android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lRecordsLabels"
         tools:listitem="@layout/item_record" />
-
-    <View
-        android:id="@+id/vHeaderShadow"
-        android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:background="@drawable/shadow_records_header"
-        app:layout_constraintTop_toTopOf="@id/rvRecords"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 package com.alexrotariu.finkeepy.di
 
-import com.alexrotariu.finkeepy.ui.MainActivity
+import com.alexrotariu.finkeepy.ui.main.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 

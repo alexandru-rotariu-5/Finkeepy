@@ -1,4 +1,4 @@
-package com.alexrotariu.finkeepy.ui.records
+package com.alexrotariu.finkeepy.ui.main.records
 
 import android.app.Dialog
 import android.os.Bundle
@@ -112,7 +112,7 @@ class RecordBottomSheet(
             )
 
             llCashflow.setBackgroundResource(
-                if (cashflow > 0) R.drawable.bg_text_rounded_profit else R.drawable.bg_text_rounded_loss
+                if (cashflow > 0) R.drawable.bg_rounded_primary else R.drawable.bg_rounded_primary_light
             )
 
             tvCashflowValue.text = getString(
