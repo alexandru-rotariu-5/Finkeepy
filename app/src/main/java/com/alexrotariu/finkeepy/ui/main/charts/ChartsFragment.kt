@@ -112,14 +112,14 @@ class ChartsFragment : Fragment() {
         val lineData = LineData()
         val barData = BarData()
 
-        data.forEachIndexed { index, (valueType, entries) ->
+        data.forEach { (valueType, entries) ->
             val lineDataSet = LineDataSet(entries, getString(valueType.labelResource))
             val barDataSet =
                 BarDataSet(mapChartEntriesToBarEntries(entries), getString(valueType.labelResource))
 
             lineDataSet.apply {
                 color =
-                    ContextCompat.getColor(requireContext(), getChartColorResourceByIndex(index))
+                    ContextCompat.getColor(requireContext(), valueType.colorResource)
                 setDrawCircles(false)
                 setDrawValues(false)
                 mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -129,7 +129,7 @@ class ChartsFragment : Fragment() {
 
             barDataSet.apply {
                 color =
-                    ContextCompat.getColor(requireContext(), getChartColorResourceByIndex(index))
+                    ContextCompat.getColor(requireContext(), valueType.colorResource)
                 setDrawValues(false)
             }
 
@@ -157,22 +157,6 @@ class ChartsFragment : Fragment() {
             BarEntry(entry.x, entry.y)
         }
     }
-
-    private fun getChartColorResourceByIndex(index: Int) = when (index) {
-        0 -> R.color.color_line_chart_first
-        1 -> R.color.color_line_chart_second
-        2 -> R.color.color_line_chart_third
-        else -> R.color.color_line_chart_fourth
-    }
-
-    private fun getSelectedValueTypeViewBackgroundDrawable(valueType: ValueType) =
-        when (viewModel.chartValueTypes.value?.indexOf(valueType) ?: -1) {
-            0 -> R.drawable.bg_chart_value_type_selected_first
-            1 -> R.drawable.bg_chart_value_type_selected_second
-            2 -> R.drawable.bg_chart_value_type_selected_third
-            else -> R.drawable.bg_chart_value_type_selected_fourth
-        }
-
 
     private fun initObservers() {
         initRecordsObserver()
@@ -219,6 +203,13 @@ class ChartsFragment : Fragment() {
         binding.bcBarChartMultiple.visibility = View.VISIBLE
     }
 
+    private fun updateSelectValueTypeViews() {
+        updateSelectValueTypeView(binding.tvSelectNetWorth, ValueType.NET_WORTH)
+        updateSelectValueTypeView(binding.tvSelectIncome, ValueType.INCOME)
+        updateSelectValueTypeView(binding.tvSelectExpense, ValueType.EXPENSE)
+        updateSelectValueTypeView(binding.tvSelectCashflow, ValueType.CASHFLOW)
+    }
+
     private fun updateSelectValueTypeView(view: TextView, valueType: ValueType) {
         view.setBackgroundResource(getSelectValueTypeViewBackground(valueType))
         view.setTextColor(
@@ -229,16 +220,9 @@ class ChartsFragment : Fragment() {
         )
     }
 
-    private fun updateSelectValueTypeViews() {
-        updateSelectValueTypeView(binding.tvSelectNetWorth, ValueType.NET_WORTH)
-        updateSelectValueTypeView(binding.tvSelectIncome, ValueType.INCOME)
-        updateSelectValueTypeView(binding.tvSelectExpense, ValueType.EXPENSE)
-        updateSelectValueTypeView(binding.tvSelectCashflow, ValueType.CASHFLOW)
-    }
-
     private fun getSelectValueTypeViewBackground(valueType: ValueType) =
         if (viewModel.chartValueTypes.value?.contains(valueType) == true) {
-            getSelectedValueTypeViewBackgroundDrawable(valueType)
+            valueType.bgDrawableResource
         } else {
             R.drawable.bg_chart_value_type_unselected
         }

@@ -138,6 +138,7 @@
             android:id="@+id/ivSelectBarChart"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_marginStart="8dp"
             android:background="@drawable/bg_chart_type_unselected"
             android:src="@drawable/ic_bar_chart_primary"
             android:layout_height="wrap_content"/>

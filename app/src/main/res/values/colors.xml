@@ -20,8 +20,8 @@
     <color name="color_loss">@color/primary_light</color>
 
     <!-- Charts -->
-    <color name="color_line_chart_first">@color/primary</color>
-    <color name="color_line_chart_second">@color/primary_light</color>
-    <color name="color_line_chart_third">#804826</color>
-    <color name="color_line_chart_fourth">#B58D75</color>
+    <color name="color_chart_net_worth">@color/primary</color>
+    <color name="color_chart_income">#804826</color>
+    <color name="color_chart_expense">#BFA18E</color>
+    <color name="color_chart_cashflow">@color/primary_light</color>
 </resources>
