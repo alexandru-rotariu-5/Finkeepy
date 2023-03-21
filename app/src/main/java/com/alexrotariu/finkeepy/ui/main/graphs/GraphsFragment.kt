@@ -11,8 +11,13 @@ import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.FragmentGraphsBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
+import com.alexrotariu.finkeepy.ui.models.GraphType
 import com.alexrotariu.finkeepy.ui.models.ValueType
+import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -42,14 +47,15 @@ class GraphsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
         initClickListeners()
-        setupGraph()
+        setupGraph(binding.lcLineChartMultiple)
+        setupGraph(binding.bcBarChartMultiple)
     }
 
     private fun getMainViewModel() = (activity as MainActivity).viewModel
 
-    private fun setupGraph() {
-        binding.lcLineChartMultiple.apply {
-            setupGraphXAxis()
+    private fun setupGraph(chart: BarLineChartBase<*>) {
+        chart.apply {
+            setupGraphXAxis(chart)
 
             axisLeft.apply {
                 setDrawGridLines(false)
@@ -75,9 +81,8 @@ class GraphsFragment : Fragment() {
         }
     }
 
-
-    private fun setupGraphXAxis() {
-        binding.lcLineChartMultiple.xAxis.apply {
+    private fun setupGraphXAxis(chart: BarLineChartBase<*>) {
+        chart.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             setDrawGridLines(false)
             setDrawAxisLine(false)
@@ -102,15 +107,16 @@ class GraphsFragment : Fragment() {
         return ""
     }
 
-
     private fun updateGraphData(data: List<Pair<ValueType, List<Entry>>>) {
-
         val lineData = LineData()
+        val barData = BarData()
 
         data.forEachIndexed { index, (valueType, entries) ->
-            val dataSet = LineDataSet(entries, getString(valueType.labelResource))
+            val lineDataSet = LineDataSet(entries, getString(valueType.labelResource))
+            val barDataSet =
+                BarDataSet(mapGraphEntriesToBarEntries(entries), getString(valueType.labelResource))
 
-            dataSet.apply {
+            lineDataSet.apply {
                 color =
                     ContextCompat.getColor(requireContext(), getGraphColorResourceByIndex(index))
                 setDrawCircles(false)
@@ -120,11 +126,35 @@ class GraphsFragment : Fragment() {
                 lineWidth = 3f
             }
 
-            lineData.addDataSet(dataSet)
+            barDataSet.apply {
+                color =
+                    ContextCompat.getColor(requireContext(), getGraphColorResourceByIndex(index))
+                setDrawValues(false)
+            }
+
+            lineData.addDataSet(lineDataSet)
+            barData.addDataSet(barDataSet)
         }
 
+        val spaceBetweenBars = 0f
+        val spaceBetweenGroups = 0.5f
+        val startValue = 0f // the starting value for the x-axis
+
+//        if (barData.dataSetCount > 1) {
+//            binding.bcBarChartMultiple.groupBars(startValue, spaceBetweenGroups, spaceBetweenBars)
+//        }
+
         binding.lcLineChartMultiple.data = lineData
+        binding.bcBarChartMultiple.data = barData
+
         binding.lcLineChartMultiple.invalidate()
+        binding.bcBarChartMultiple.invalidate()
+    }
+
+    private fun mapGraphEntriesToBarEntries(entries: List<Entry>): List<BarEntry> {
+        return entries.map { entry ->
+            BarEntry(entry.x, entry.y)
+        }
     }
 
     private fun getGraphColorResourceByIndex(index: Int) = when (index) {
@@ -144,18 +174,48 @@ class GraphsFragment : Fragment() {
 
 
     private fun initObservers() {
+        initRecordsObserver()
+        initGraphTypeObserver()
+        initGraphValueTypesObserver()
+    }
+
+    private fun initRecordsObserver() {
         getMainViewModel().records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
                 updateGraphData(createValueTypeEntriesPairList())
             }
         }
+    }
 
+    private fun initGraphValueTypesObserver() {
         viewModel.graphValueTypes.observe(viewLifecycleOwner) { valueTypes ->
             if (valueTypes != null) {
                 updateGraphData(createValueTypeEntriesPairList())
                 updateSelectValueTypeViews()
             }
         }
+    }
+
+    private fun initGraphTypeObserver() {
+        viewModel.graphType.observe(viewLifecycleOwner) { type ->
+            when (type) {
+                GraphType.LINE -> showLineChart()
+                GraphType.BAR -> showBarChart()
+                else -> showLineChart()
+            }
+
+            updateSelectGraphTypeViews()
+        }
+    }
+
+    private fun showLineChart() {
+        binding.bcBarChartMultiple.visibility = View.INVISIBLE
+        binding.lcLineChartMultiple.visibility = View.VISIBLE
+    }
+
+    private fun showBarChart() {
+        binding.lcLineChartMultiple.visibility = View.INVISIBLE
+        binding.bcBarChartMultiple.visibility = View.VISIBLE
     }
 
     private fun updateSelectValueTypeView(view: TextView, valueType: ValueType) {
@@ -189,6 +249,34 @@ class GraphsFragment : Fragment() {
             R.color.primary
         }
 
+    private fun updateSelectGraphTypeViews() {
+        updateSelectGraphTypeView(binding.tvSelectLineChart, GraphType.LINE)
+        updateSelectGraphTypeView(binding.tvSelectBarChart, GraphType.BAR)
+    }
+
+    private fun updateSelectGraphTypeView(view: TextView, graphType: GraphType) {
+        view.setBackgroundResource(getSelectGraphTypeViewBackground(graphType))
+        view.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                getSelectedGraphTypeViewTextColor(graphType)
+            )
+        )
+    }
+
+    private fun getSelectGraphTypeViewBackground(graphType: GraphType) =
+        if (viewModel.graphType.value == graphType) {
+            R.drawable.bg_graph_type_selected
+        } else {
+            R.drawable.bg_graph_type_unselected
+        }
+
+    private fun getSelectedGraphTypeViewTextColor(graphType: GraphType) =
+        if (viewModel.graphType.value == graphType) {
+            R.color.white
+        } else {
+            R.color.primary
+        }
 
     private fun initClickListeners() {
         binding.tvSelectNetWorth.setOnClickListener {
@@ -205,6 +293,14 @@ class GraphsFragment : Fragment() {
 
         binding.tvSelectCashflow.setOnClickListener {
             viewModel.toggleValueType(ValueType.CASHFLOW)
+        }
+
+        binding.tvSelectLineChart.setOnClickListener {
+            viewModel.setGraphType(GraphType.LINE)
+        }
+
+        binding.tvSelectBarChart.setOnClickListener {
+            viewModel.setGraphType(GraphType.BAR)
         }
     }
 

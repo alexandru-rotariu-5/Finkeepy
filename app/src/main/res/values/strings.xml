@@ -26,8 +26,10 @@
     <string name="spent">Spent</string>
     <string name="your_net_worth_increased_by">Your net worth increased by</string>
     <string name="your_net_worth_decreased_by">Your net worth decreased by</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Charts -->
+    <string name="line_chart">Line</string>
+    <string name="bar_chart">Bar</string>
 
     <!-- Data -->
     <string name="data">Data</string>

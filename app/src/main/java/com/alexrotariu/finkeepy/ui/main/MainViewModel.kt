@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.data.repositories.RecordsRepository
 import com.alexrotariu.finkeepy.ui.models.ValueType
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +29,7 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
         _isLoading.value = true
         viewModelScope.launch {
             val response = recordsRepository.getAllRecords()
-            response?.let{ _records.value = response }
+            response?.let { _records.value = response }
             callback()
             _isLoading.value = false
         }
