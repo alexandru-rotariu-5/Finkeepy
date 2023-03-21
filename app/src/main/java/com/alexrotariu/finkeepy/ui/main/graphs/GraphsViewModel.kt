@@ -15,7 +15,9 @@ class GraphsViewModel @Inject constructor() : ViewModel() {
     fun toggleValueType(valueType: ValueType) {
         _graphValueTypes.value?.let {
             if (it.contains(valueType)) {
-                it.remove(valueType)
+                if (it.size > 1) {
+                    it.remove(valueType)
+                }
             } else {
                 it.add(valueType)
             }
