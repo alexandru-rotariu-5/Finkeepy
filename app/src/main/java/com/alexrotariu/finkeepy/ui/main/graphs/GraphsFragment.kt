@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -250,18 +251,13 @@ class GraphsFragment : Fragment() {
         }
 
     private fun updateSelectGraphTypeViews() {
-        updateSelectGraphTypeView(binding.tvSelectLineChart, GraphType.LINE)
-        updateSelectGraphTypeView(binding.tvSelectBarChart, GraphType.BAR)
+        updateSelectGraphTypeView(binding.ivSelectLineChart, GraphType.LINE)
+        updateSelectGraphTypeView(binding.ivSelectBarChart, GraphType.BAR)
     }
 
-    private fun updateSelectGraphTypeView(view: TextView, graphType: GraphType) {
+    private fun updateSelectGraphTypeView(view: ImageView, graphType: GraphType) {
         view.setBackgroundResource(getSelectGraphTypeViewBackground(graphType))
-        view.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                getSelectedGraphTypeViewTextColor(graphType)
-            )
-        )
+        view.setImageResource(getSelectedGraphTypeViewImageResource(graphType))
     }
 
     private fun getSelectGraphTypeViewBackground(graphType: GraphType) =
@@ -271,11 +267,19 @@ class GraphsFragment : Fragment() {
             R.drawable.bg_graph_type_unselected
         }
 
-    private fun getSelectedGraphTypeViewTextColor(graphType: GraphType) =
+    private fun getSelectedGraphTypeViewImageResource(graphType: GraphType) =
         if (viewModel.graphType.value == graphType) {
-            R.color.white
+            when (graphType) {
+                GraphType.LINE -> R.drawable.ic_line_chart_white
+                GraphType.BAR -> R.drawable.ic_bar_chart_white
+                else -> R.drawable.ic_line_chart_white
+            }
         } else {
-            R.color.primary
+            when (graphType) {
+                GraphType.LINE -> R.drawable.ic_line_chart_primary
+                GraphType.BAR -> R.drawable.ic_bar_chart_primary
+                else -> R.drawable.ic_line_chart_primary
+            }
         }
 
     private fun initClickListeners() {
@@ -295,11 +299,11 @@ class GraphsFragment : Fragment() {
             viewModel.toggleValueType(ValueType.CASHFLOW)
         }
 
-        binding.tvSelectLineChart.setOnClickListener {
+        binding.ivSelectLineChart.setOnClickListener {
             viewModel.setGraphType(GraphType.LINE)
         }
 
-        binding.tvSelectBarChart.setOnClickListener {
+        binding.ivSelectBarChart.setOnClickListener {
             viewModel.setGraphType(GraphType.BAR)
         }
     }

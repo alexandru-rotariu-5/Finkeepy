@@ -121,35 +121,22 @@
         app:layout_constraintTop_toBottomOf="@id/bcBarChartMultiple">
 
         <!-- Line chart -->
-        <TextView
-            android:id="@+id/tvSelectLineChart"
+        <ImageView
+            android:id="@+id/ivSelectLineChart"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_value_type_unselected"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="@font/bold"
-            android:text="@string/line_chart"
-            android:textAlignment="center"
-            android:textColor="@color/primary"
-            android:textSize="12sp" />
+            android:background="@drawable/bg_graph_type_unselected"
+            android:src="@drawable/ic_line_chart_primary"
+            android:layout_height="wrap_content"/>
 
         <!-- Bar chart -->
-        <TextView
-            android:id="@+id/tvSelectBarChart"
+        <ImageView
+            android:id="@+id/ivSelectBarChart"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_value_type_unselected"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="@font/bold"
-            android:text="@string/bar_chart"
-            android:textAlignment="center"
-            android:textColor="@color/primary"
-            android:textSize="12sp" />
+            android:background="@drawable/bg_graph_type_unselected"
+            android:src="@drawable/ic_bar_chart_primary"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
