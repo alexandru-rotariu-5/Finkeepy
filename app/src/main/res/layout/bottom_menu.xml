@@ -24,7 +24,7 @@
         android:src="@drawable/ic_records_primary" />
 
     <ImageButton
-        android:id="@+id/btnMenuGraphs"
+        android:id="@+id/btnMenuCharts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"

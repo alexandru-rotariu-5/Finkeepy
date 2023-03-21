@@ -1,6 +1,6 @@
 package com.alexrotariu.finkeepy.ui.models
 
-enum class GraphType {
+enum class ChartType {
     LINE,
     BAR
 }

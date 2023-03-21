@@ -36,9 +36,9 @@
         app:layout_constraintTop_toBottomOf="@id/tvDate"
         tools:text="10,000 RON" />
 
-    <!-- Cashflow graph -->
+    <!-- Cashflow chart -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clCashflowGraph"
+        android:id="@+id/clCashflowChart"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginHorizontal="40dp"
@@ -74,7 +74,7 @@
             android:id="@+id/vIncome"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:background="@drawable/bg_record_cashflow_graph_income"
+            android:background="@drawable/bg_record_cashflow_chart_income"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="-40dp"
-            android:background="@drawable/bg_record_cashflow_graph_expense"
+            android:background="@drawable/bg_record_cashflow_chart_expense"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -121,11 +121,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/vCashflowGraphSeparator"
+        android:id="@+id/vCashflowChartSeparator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/dark_grey"
-        app:layout_constraintTop_toBottomOf="@id/clCashflowGraph" />
+        app:layout_constraintTop_toBottomOf="@id/clCashflowChart" />
 
     <TextView
         android:id="@+id/tvCashflowLabel"
@@ -138,7 +138,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vCashflowGraphSeparator" />
+        app:layout_constraintTop_toBottomOf="@id/vCashflowChartSeparator" />
 
     <LinearLayout
         android:id="@+id/llCashflow"

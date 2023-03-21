@@ -86,7 +86,7 @@
         tools:text="200 last month" />
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lcMainGraph"
+        android:id="@+id/lcMainChart"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginHorizontal="20dp"
@@ -105,7 +105,7 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lcMainGraph" />
+        app:layout_constraintTop_toBottomOf="@id/lcMainChart" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecords"

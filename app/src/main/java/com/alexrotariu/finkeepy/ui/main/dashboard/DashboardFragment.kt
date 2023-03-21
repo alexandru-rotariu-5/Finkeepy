@@ -51,16 +51,16 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecordsAdapter()
-        setupGraph()
+        setupChart()
         initObservers()
         initClickListeners()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
 
-    private fun setupGraph() {
-        binding.lcMainGraph.apply {
-            setupGraphXAxis()
+    private fun setupChart() {
+        binding.lcMainChart.apply {
+            setupChartXAxis()
 
             axisLeft.apply {
                 setDrawGridLines(false)
@@ -87,8 +87,8 @@ class DashboardFragment : Fragment() {
     }
 
 
-    private fun setupGraphXAxis() {
-        binding.lcMainGraph.xAxis.apply {
+    private fun setupChartXAxis() {
+        binding.lcMainChart.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             setDrawGridLines(false)
             setDrawAxisLine(false)
@@ -96,13 +96,13 @@ class DashboardFragment : Fragment() {
             granularity = 1f
             valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String? =
-                    formatGraphLabelToDate(value)
+                    formatChartLabelToDate(value)
             }
             textColor = ContextCompat.getColor(requireContext(), R.color.primary)
         }
     }
 
-    private fun formatGraphLabelToDate(value: Float): String? {
+    private fun formatChartLabelToDate(value: Float): String? {
         val index = value.toInt()
         if (index >= 0 && index < (getViewModel().records.value?.size ?: 0)) {
             val date = getViewModel().records.value?.reversed()?.get(index)?.timestamp
@@ -114,8 +114,8 @@ class DashboardFragment : Fragment() {
     }
 
 
-    private fun updateGraphData(data: List<Entry>, label: ValueType) {
-        val dataSet = LineDataSet(data, getString(label.labelResource))
+    private fun updateChartData(data: List<Entry>) {
+        val dataSet = LineDataSet(data, getString(R.string.net_worth))
 
         dataSet.apply {
             color = ContextCompat.getColor(requireContext(), R.color.primary)
@@ -128,8 +128,8 @@ class DashboardFragment : Fragment() {
 
         val lineData = LineData(dataSet)
 
-        binding.lcMainGraph.data = lineData
-        binding.lcMainGraph.invalidate()
+        binding.lcMainChart.data = lineData
+        binding.lcMainChart.invalidate()
     }
 
 
@@ -153,10 +153,7 @@ class DashboardFragment : Fragment() {
                 updateNetWorthView(getViewModel().getNetWorth())
                 updateLastMonthCashflowView(getViewModel().getLastMonthCashflow())
                 updateRecords(records)
-                updateGraphData(
-                    getViewModel().getGraphEntries(ValueType.NET_WORTH),
-                    ValueType.NET_WORTH
-                )
+                updateChartData(getViewModel().getChartEntries(ValueType.NET_WORTH))
             }
         }
     }

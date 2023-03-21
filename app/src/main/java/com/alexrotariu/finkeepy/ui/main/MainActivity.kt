@@ -11,10 +11,8 @@ import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
 import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
-import com.alexrotariu.finkeepy.ui.main.data.DataFragment
-import com.alexrotariu.finkeepy.ui.main.graphs.GraphsFragment
+import com.alexrotariu.finkeepy.ui.main.charts.ChartsFragment
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
-import com.google.common.graph.Graph
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -58,8 +56,8 @@ class MainActivity : AppCompatActivity() {
             openFragment(RecordsFragment())
         }
 
-        binding.bottomMenu.btnMenuGraphs.setOnClickListener {
-            openFragment(GraphsFragment())
+        binding.bottomMenu.btnMenuCharts.setOnClickListener {
+            openFragment(ChartsFragment())
         }
     }
 

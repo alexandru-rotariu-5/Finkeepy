@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_background"
-    tools:context=".ui.main.graphs.GraphsFragment">
+    tools:context=".ui.main.charts.ChartsFragment">
 
     <LinearLayout
         android:id="@+id/llValueTypes"
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_value_type_unselected"
+            android:background="@drawable/bg_chart_value_type_unselected"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/bold"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_value_type_unselected"
+            android:background="@drawable/bg_chart_value_type_unselected"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/bold"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_value_type_unselected"
+            android:background="@drawable/bg_chart_value_type_unselected"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/bold"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_value_type_unselected"
+            android:background="@drawable/bg_chart_value_type_unselected"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/bold"
@@ -111,7 +111,7 @@
         tools:visibility="visible" />
 
     <LinearLayout
-        android:id="@+id/llGraphTypes"
+        android:id="@+id/llChartTypes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -129,7 +129,7 @@
             android:id="@+id/ivSelectLineChart"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_type_unselected"
+            android:background="@drawable/bg_chart_type_unselected"
             android:src="@drawable/ic_line_chart_primary"
             android:layout_height="wrap_content"/>
 
@@ -138,7 +138,7 @@
             android:id="@+id/ivSelectBarChart"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_graph_type_unselected"
+            android:background="@drawable/bg_chart_type_unselected"
             android:src="@drawable/ic_bar_chart_primary"
             android:layout_height="wrap_content"/>
 

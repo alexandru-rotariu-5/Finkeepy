@@ -15,7 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-const val CASHFLOW_GRAPH_HEIGHT = 120
+const val CASHFLOW_CHART_HEIGHT = 120
 
 class RecordBottomSheet(
     private val record: Record,
@@ -60,11 +60,11 @@ class RecordBottomSheet(
     private fun initViews() {
         binding.tvDate.text = record.timestamp.getShortMonthAndYear()
         setupNetWorthView()
-        setupCashflowGraph()
+        setupCashflowChart()
         setupCashflowViews()
     }
 
-    private fun setupCashflowGraph() {
+    private fun setupCashflowChart() {
         val income = record.income
         val expense = record.getExpense(previousNetWorth)
 
@@ -73,7 +73,7 @@ class RecordBottomSheet(
         val ratio = (if (max == income) expense else income) / max
 
         val maxHeight =
-            (CASHFLOW_GRAPH_HEIGHT * LayoutUtils.getDpToPx(binding.root.context)).toInt()
+            (CASHFLOW_CHART_HEIGHT * LayoutUtils.getDpToPx(binding.root.context)).toInt()
         val minHeight = (ratio * maxHeight).toInt()
 
         binding.apply {

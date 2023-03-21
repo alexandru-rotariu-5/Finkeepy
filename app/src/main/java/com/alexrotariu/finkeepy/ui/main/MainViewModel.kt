@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.data.repositories.RecordsRepository
 import com.alexrotariu.finkeepy.ui.models.ValueType
-import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -44,7 +43,7 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
             ?: 0.0
     }
 
-    fun getGraphEntries(valueType: ValueType): List<Entry> {
+    fun getChartEntries(valueType: ValueType): List<Entry> {
         val entries: MutableList<Entry> = mutableListOf()
         val reversedRecords = records.value?.reversed()
 
