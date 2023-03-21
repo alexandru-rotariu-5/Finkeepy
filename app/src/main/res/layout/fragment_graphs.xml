@@ -7,5 +7,91 @@
     android:background="@color/color_background"
     tools:context=".ui.main.graphs.GraphsFragment">
 
+    <LinearLayout
+        android:id="@+id/llValueTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Net Worth -->
+        <TextView
+            android:id="@+id/tvSelectNetWorth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_graph_value_type_unselected"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/bold"
+            android:text="@string/net_worth"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="12sp" />
+
+        <!-- Income -->
+        <TextView
+            android:id="@+id/tvSelectIncome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_graph_value_type_unselected"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/bold"
+            android:text="@string/income"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="12sp" />
+
+        <!-- Expense -->
+        <TextView
+            android:id="@+id/tvSelectExpense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_graph_value_type_unselected"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/bold"
+            android:text="@string/expense"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="12sp" />
+
+        <!-- Cash Flow -->
+        <TextView
+            android:id="@+id/tvSelectCashflow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_graph_value_type_unselected"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/bold"
+            android:text="@string/cashflow"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lcLineChartMultiple"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llValueTypes" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

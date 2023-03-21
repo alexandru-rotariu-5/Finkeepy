@@ -17,9 +17,6 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
     private val _records = MutableLiveData<List<Record?>?>()
     val records: LiveData<List<Record?>?> = _records
 
-    private val _graphValueType = MutableLiveData(ValueType.NET_WORTH)
-    val graphValueType: LiveData<ValueType> = _graphValueType
-
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -31,9 +28,7 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
         _isLoading.value = true
         viewModelScope.launch {
             val response = recordsRepository.getAllRecords()
-            if (response != null) {
-                _records.value = response
-            }
+            response?.let{ _records.value = response }
             callback()
             _isLoading.value = false
         }
@@ -48,20 +43,19 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
             ?: 0.0
     }
 
-    fun getChartEntries(): List<Entry> {
+    fun getGraphEntries(valueType: ValueType): List<Entry> {
         val entries: MutableList<Entry> = mutableListOf()
         val reversedRecords = records.value?.reversed()
 
         reversedRecords?.forEachIndexed { index, record ->
             val previousNetWorth = reversedRecords.getOrNull(index - 1)?.netWorth ?: 0.0
-            if (record != null) {
+            record?.let {
                 val xValue = index.toFloat()
-                val yValue = when (_graphValueType.value) {
+                val yValue = when (valueType) {
                     ValueType.NET_WORTH -> record.netWorth.toFloat()
                     ValueType.INCOME -> record.income.toFloat()
                     ValueType.EXPENSE -> record.getExpense(previousNetWorth).toFloat()
                     ValueType.CASHFLOW -> record.getCashflow(previousNetWorth).toFloat()
-                    else -> record.netWorth.toFloat()
                 }
                 entries.add(Entry(xValue, yValue))
             }

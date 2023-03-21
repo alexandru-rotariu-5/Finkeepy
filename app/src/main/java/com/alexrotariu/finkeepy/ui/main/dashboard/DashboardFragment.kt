@@ -154,8 +154,8 @@ class DashboardFragment : Fragment() {
                 updateLastMonthCashflowView(getViewModel().getLastMonthCashflow())
                 updateRecords(records)
                 updateGraphData(
-                    getViewModel().getChartEntries(),
-                    getViewModel().graphValueType.value!!
+                    getViewModel().getGraphEntries(ValueType.NET_WORTH),
+                    ValueType.NET_WORTH
                 )
             }
         }

@@ -18,4 +18,10 @@
     <!-- Record -->
     <color name="color_profit">@color/primary</color>
     <color name="color_loss">@color/primary_light</color>
+
+    <!-- Graphs -->
+    <color name="color_line_graph_first">@color/primary</color>
+    <color name="color_line_graph_second">@color/primary_light</color>
+    <color name="color_line_graph_third">#804826</color>
+    <color name="color_line_graph_fourth">#B58D75</color>
 </resources>
