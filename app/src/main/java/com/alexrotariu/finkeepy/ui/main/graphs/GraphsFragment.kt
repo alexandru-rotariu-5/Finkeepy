@@ -137,10 +137,10 @@ class GraphsFragment : Fragment() {
             barData.addDataSet(barDataSet)
         }
 
-        val spaceBetweenBars = 0f
-        val spaceBetweenGroups = 0.5f
-        val startValue = 0f // the starting value for the x-axis
-
+//        val spaceBetweenBars = 0f
+//        val spaceBetweenGroups = 0.5f
+//        val startValue = 0f // the starting value for the x-axis
+//
 //        if (barData.dataSetCount > 1) {
 //            binding.bcBarChartMultiple.groupBars(startValue, spaceBetweenGroups, spaceBetweenBars)
 //        }
