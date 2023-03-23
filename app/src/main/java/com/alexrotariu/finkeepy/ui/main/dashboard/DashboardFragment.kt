@@ -23,6 +23,7 @@ import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.formatDecimalString
 import com.alexrotariu.finkeepy.utils.split
 import com.alexrotariu.finkeepy.utils.capitalize
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -39,6 +40,8 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var recordAdapter: RecordAdapter
+
+    private val animationDuration = 1500
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -129,7 +132,13 @@ class DashboardFragment : Fragment() {
         val lineData = LineData(dataSet)
 
         binding.lcMainChart.data = lineData
+        animateLineChart()
+
         binding.lcMainChart.invalidate()
+    }
+
+    private fun animateLineChart() {
+        binding.lcMainChart.animateY(animationDuration, Easing.EaseInOutCubic)
     }
 
 

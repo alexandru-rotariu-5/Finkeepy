@@ -1,17 +1,17 @@
 package com.alexrotariu.finkeepy.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
-import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
 import com.alexrotariu.finkeepy.ui.main.charts.ChartsFragment
+import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
 import javax.inject.Inject
 
@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                val currentFragment =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
                 if (currentFragment is DashboardFragment) {
                     finish()
                 } else {
@@ -48,17 +49,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
-        binding.bottomMenu.btnMenuDashboard.setOnClickListener {
-            openFragment(DashboardFragment())
-        }
+        binding.bottomMenu.btnMenuDashboard.setOnClickListener { onDashboardClicked() }
+        binding.bottomMenu.btnMenuRecords.setOnClickListener { onRecordsClicked() }
+        binding.bottomMenu.btnMenuCharts.setOnClickListener { onChartsClicked() }
+    }
 
-        binding.bottomMenu.btnMenuRecords.setOnClickListener {
-            openFragment(RecordsFragment())
-        }
+    private fun onDashboardClicked() {
+        openFragment(DashboardFragment())
+    }
 
-        binding.bottomMenu.btnMenuCharts.setOnClickListener {
-            openFragment(ChartsFragment())
-        }
+    private fun onRecordsClicked() {
+        openFragment(RecordsFragment())
+    }
+
+    private fun onChartsClicked() {
+        openFragment(ChartsFragment())
     }
 
     private fun initObservers() {
@@ -72,7 +77,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSwipeRefresh() {
-        binding.swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.primary))
+        binding.swipeRefreshLayout.setColorSchemeColors(
+            ContextCompat.getColor(
+                this,
+                R.color.primary
+            )
+        )
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getRecords {
                 binding.swipeRefreshLayout.isRefreshing = false

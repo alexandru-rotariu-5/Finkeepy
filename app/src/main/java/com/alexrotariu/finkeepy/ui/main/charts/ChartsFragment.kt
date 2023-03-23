@@ -1,5 +1,6 @@
 package com.alexrotariu.finkeepy.ui.main.charts
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.alexrotariu.finkeepy.databinding.FragmentChartsBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
 import com.alexrotariu.finkeepy.ui.models.ChartType
 import com.alexrotariu.finkeepy.ui.models.ValueType
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -27,10 +29,13 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 import javax.inject.Inject
 
+
 class ChartsFragment : Fragment() {
 
     private var _binding: FragmentChartsBinding? = null
     private val binding get() = _binding!!
+
+    private val animationDuration = 500
 
     @Inject
     lateinit var viewModel: ChartsViewModel
@@ -120,6 +125,9 @@ class ChartsFragment : Fragment() {
             lineDataSet.apply {
                 color =
                     ContextCompat.getColor(requireContext(), valueType.colorResource)
+                fillColor = ContextCompat.getColor(requireContext(), valueType.colorResource)
+                fillAlpha = 200
+                setDrawFilled(viewModel.chartType.value == ChartType.AREA)
                 setDrawCircles(false)
                 setDrawValues(false)
                 mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -150,6 +158,17 @@ class ChartsFragment : Fragment() {
 
         binding.lcLineChartMultiple.invalidate()
         binding.bcBarChartMultiple.invalidate()
+    }
+
+    private fun getLineChartFillGradient(colorResource: Int): GradientDrawable {
+        val gradient = GradientDrawable()
+        gradient.colors = intArrayOf(
+            ContextCompat.getColor(requireContext(), colorResource),
+            ContextCompat.getColor(requireContext(), R.color.white)
+        )
+        gradient.gradientType = GradientDrawable.LINEAR_GRADIENT
+        gradient.orientation = GradientDrawable.Orientation.TOP_BOTTOM
+        return gradient
     }
 
     private fun mapChartEntriesToBarEntries(entries: List<Entry>): List<BarEntry> {
@@ -184,23 +203,45 @@ class ChartsFragment : Fragment() {
     private fun initChartTypeObserver() {
         viewModel.chartType.observe(viewLifecycleOwner) { type ->
             when (type) {
-                ChartType.LINE -> showLineChart()
+                ChartType.LINE, ChartType.AREA -> showLineChart()
                 ChartType.BAR -> showBarChart()
                 else -> showLineChart()
             }
-
+            updateChartData(createValueTypeEntriesPairList())
             updateSelectChartTypeViews()
         }
     }
 
     private fun showLineChart() {
-        binding.bcBarChartMultiple.visibility = View.INVISIBLE
-        binding.lcLineChartMultiple.visibility = View.VISIBLE
+        binding.apply {
+            bcBarChartMultiple.visibility = View.INVISIBLE
+            lcLineChartMultiple.visibility = View.VISIBLE
+            if (viewModel.chartType.value == ChartType.LINE) {
+                animateLineChart()
+            } else {
+                animateAreaChart()
+            }
+        }
     }
 
     private fun showBarChart() {
-        binding.lcLineChartMultiple.visibility = View.INVISIBLE
-        binding.bcBarChartMultiple.visibility = View.VISIBLE
+        binding.apply {
+            lcLineChartMultiple.visibility = View.INVISIBLE
+            bcBarChartMultiple.visibility = View.VISIBLE
+            animateBarChart()
+        }
+    }
+
+    private fun animateLineChart() {
+        binding.lcLineChartMultiple.animateY(animationDuration, Easing.EaseInOutQuad)
+    }
+
+    private fun animateAreaChart() {
+        binding.lcLineChartMultiple.animateY(animationDuration, Easing.EaseInOutQuad)
+    }
+
+    private fun animateBarChart() {
+        binding.bcBarChartMultiple.animateY(animationDuration, Easing.EaseInOutCubic)
     }
 
     private fun updateSelectValueTypeViews() {
@@ -236,6 +277,7 @@ class ChartsFragment : Fragment() {
 
     private fun updateSelectChartTypeViews() {
         updateSelectChartTypeView(binding.ivSelectLineChart, ChartType.LINE)
+        updateSelectChartTypeView(binding.ivSelectAreaChart, ChartType.AREA)
         updateSelectChartTypeView(binding.ivSelectBarChart, ChartType.BAR)
     }
 
@@ -255,18 +297,25 @@ class ChartsFragment : Fragment() {
         if (viewModel.chartType.value == chartType) {
             when (chartType) {
                 ChartType.LINE -> R.drawable.ic_line_chart_white
+                ChartType.AREA -> R.drawable.ic_area_chart_white
                 ChartType.BAR -> R.drawable.ic_bar_chart_white
                 else -> R.drawable.ic_line_chart_white
             }
         } else {
             when (chartType) {
                 ChartType.LINE -> R.drawable.ic_line_chart_primary
+                ChartType.AREA -> R.drawable.ic_area_chart_primary
                 ChartType.BAR -> R.drawable.ic_bar_chart_primary
                 else -> R.drawable.ic_line_chart_primary
             }
         }
 
     private fun initClickListeners() {
+        initValueTypesClickListeners()
+        initChartTypesClickListeners()
+    }
+
+    private fun initValueTypesClickListeners() {
         binding.tvSelectNetWorth.setOnClickListener {
             viewModel.toggleValueType(ValueType.NET_WORTH)
         }
@@ -282,9 +331,15 @@ class ChartsFragment : Fragment() {
         binding.tvSelectCashflow.setOnClickListener {
             viewModel.toggleValueType(ValueType.CASHFLOW)
         }
+    }
 
+    private fun initChartTypesClickListeners() {
         binding.ivSelectLineChart.setOnClickListener {
             viewModel.setChartType(ChartType.LINE)
+        }
+
+        binding.ivSelectAreaChart.setOnClickListener {
+            viewModel.setChartType(ChartType.AREA)
         }
 
         binding.ivSelectBarChart.setOnClickListener {

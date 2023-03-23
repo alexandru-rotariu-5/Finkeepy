@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:elevation="8dp"
-        android:background="@drawable/bg_white_rounded"
         android:layout_weight="1"
+        android:background="@drawable/bg_white_rounded"
+        android:elevation="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,9 +117,9 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
         android:background="@drawable/bg_white_rounded"
         android:elevation="8dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bcBarChartMultiple">
@@ -128,20 +128,30 @@
         <ImageView
             android:id="@+id/ivSelectLineChart"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_line_chart_primary"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/ic_line_chart_primary" />
+
+        <!-- Area chart -->
+        <ImageView
+            android:id="@+id/ivSelectAreaChart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_chart_type_unselected"
+            android:src="@drawable/ic_area_chart_primary" />
 
         <!-- Bar chart -->
         <ImageView
             android:id="@+id/ivSelectBarChart"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_bar_chart_primary"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/ic_bar_chart_primary" />
 
     </LinearLayout>
 
