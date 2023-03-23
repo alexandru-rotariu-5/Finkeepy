@@ -1,5 +1,6 @@
 package com.alexrotariu.finkeepy.ui.main.dashboard
 
+import android.animation.ValueAnimator
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
@@ -42,6 +43,7 @@ class DashboardFragment : Fragment() {
     private lateinit var recordAdapter: RecordAdapter
 
     private val animationDuration = 1500
+    private var valueAnimator: ValueAnimator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -168,12 +170,19 @@ class DashboardFragment : Fragment() {
     }
 
     private fun updateNetWorthView(netWorth: Double) {
-        binding.tvNetWorthWhole.text = netWorth.split().first.format()
-        binding.tvNetWorthDecimal.text =
-            String.format(
-                getString(R.string.decimal),
-                netWorth.split().second.toString().formatDecimalString()
-            )
+        valueAnimator = ValueAnimator.ofFloat(0f, netWorth.toFloat())
+        valueAnimator?.duration = animationDuration.toLong()
+        valueAnimator?.addUpdateListener { valueAnimator ->
+            val animatedValue = valueAnimator.animatedValue as Float
+            val animatedNetWorth = animatedValue.toDouble()
+            binding.tvNetWorthWhole.text = animatedNetWorth.split().first.format()
+            binding.tvNetWorthDecimal.text =
+                String.format(
+                    getString(R.string.decimal),
+                    animatedNetWorth.split().second.toString().formatDecimalString()
+                )
+        }
+        valueAnimator?.start()
     }
 
     private fun updateLastMonthCashflowView(cashflow: Double) {
@@ -223,6 +232,11 @@ class DashboardFragment : Fragment() {
 
     private fun updateRecords(records: List<Record?>?) {
         recordAdapter.setFullList(records)
+    }
+
+    override fun onDestroyView() {
+        valueAnimator?.cancel()
+        super.onDestroyView()
     }
 
     companion object {
