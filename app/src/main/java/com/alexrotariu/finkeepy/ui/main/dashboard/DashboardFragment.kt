@@ -17,13 +17,13 @@ import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
 import com.alexrotariu.finkeepy.ui.main.records.RecordAdapter
-import com.alexrotariu.finkeepy.ui.models.ValueType
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
+import com.alexrotariu.finkeepy.ui.models.ValueType
 import com.alexrotariu.finkeepy.utils.StringUtils
+import com.alexrotariu.finkeepy.utils.capitalize
 import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.formatDecimalString
 import com.alexrotariu.finkeepy.utils.split
-import com.alexrotariu.finkeepy.utils.capitalize
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -62,6 +62,16 @@ class DashboardFragment : Fragment() {
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
+
+    private fun isNetWorthAnimationPlayed() = (activity as MainActivity).isDashboardNetWorthAnimationPlayed()
+
+    private fun setNetWorthAnimationPlayed() =
+        (activity as MainActivity).setDashboardNetWorthAnimationPlayed()
+
+    private fun isChartAnimationPlayed() = (activity as MainActivity).isDashboardChartAnimationPlayed()
+
+    private fun setChartAnimationPlayed() =
+        (activity as MainActivity).setDashboardChartAnimationPlayed()
 
     private fun setupChart() {
         binding.lcMainChart.apply {
@@ -134,7 +144,11 @@ class DashboardFragment : Fragment() {
         val lineData = LineData(dataSet)
 
         binding.lcMainChart.data = lineData
-        animateLineChart()
+
+        if (!isChartAnimationPlayed()) {
+            animateLineChart()
+            setChartAnimationPlayed()
+        }
 
         binding.lcMainChart.invalidate()
     }
@@ -170,6 +184,14 @@ class DashboardFragment : Fragment() {
     }
 
     private fun updateNetWorthView(netWorth: Double) {
+        if (!isNetWorthAnimationPlayed()) {
+            setNetWorthViewWithAnimation(netWorth)
+        } else {
+            setNetWorthViewWithoutAnimation(netWorth)
+        }
+    }
+
+    private fun setNetWorthViewWithAnimation(netWorth: Double) {
         valueAnimator = ValueAnimator.ofFloat(0f, netWorth.toFloat())
         valueAnimator?.duration = animationDuration.toLong()
         valueAnimator?.addUpdateListener { valueAnimator ->
@@ -183,6 +205,16 @@ class DashboardFragment : Fragment() {
                 )
         }
         valueAnimator?.start()
+        setNetWorthAnimationPlayed()
+    }
+
+    private fun setNetWorthViewWithoutAnimation(netWorth: Double) {
+        binding.tvNetWorthWhole.text = netWorth.split().first.format()
+        binding.tvNetWorthDecimal.text =
+            String.format(
+                getString(R.string.decimal),
+                netWorth.split().second.toString().formatDecimalString()
+            )
     }
 
     private fun updateLastMonthCashflowView(cashflow: Double) {

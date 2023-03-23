@@ -299,14 +299,12 @@ class ChartsFragment : Fragment() {
                 ChartType.LINE -> R.drawable.ic_line_chart_white
                 ChartType.AREA -> R.drawable.ic_area_chart_white
                 ChartType.BAR -> R.drawable.ic_bar_chart_white
-                else -> R.drawable.ic_line_chart_white
             }
         } else {
             when (chartType) {
                 ChartType.LINE -> R.drawable.ic_line_chart_primary
                 ChartType.AREA -> R.drawable.ic_area_chart_primary
                 ChartType.BAR -> R.drawable.ic_bar_chart_primary
-                else -> R.drawable.ic_line_chart_primary
             }
         }
 

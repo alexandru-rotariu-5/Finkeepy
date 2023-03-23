@@ -13,7 +13,9 @@ import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
 import com.alexrotariu.finkeepy.ui.main.charts.ChartsFragment
 import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
+import com.alexrotariu.finkeepy.ui.models.Screen
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: MainViewModel
 
+    private var isDashboardNetWorthAnimationPlayed = false
+    private var isDashboardChartAnimationPlayed = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (applicationContext as App).appComponent.inject(this)
         super.onCreate(savedInstanceState)
@@ -29,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        updateBottomMenu(Screen.DASHBOARD)
 
         setOnClickListeners()
         initObservers()
@@ -49,30 +56,63 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
-        binding.bottomMenu.btnMenuDashboard.setOnClickListener { onDashboardClicked() }
-        binding.bottomMenu.btnMenuRecords.setOnClickListener { onRecordsClicked() }
-        binding.bottomMenu.btnMenuCharts.setOnClickListener { onChartsClicked() }
+        binding.bottomMenu.apply {
+            btnMenuDashboard.setOnClickListener { onDashboardClicked() }
+            btnMenuRecords.setOnClickListener { onRecordsClicked() }
+            btnMenuCharts.setOnClickListener { onChartsClicked() }
+        }
     }
 
     private fun onDashboardClicked() {
         openFragment(DashboardFragment())
+        updateBottomMenu(Screen.DASHBOARD)
     }
 
     private fun onRecordsClicked() {
         openFragment(RecordsFragment())
+        updateBottomMenu(Screen.RECORDS)
     }
 
     private fun onChartsClicked() {
         openFragment(ChartsFragment())
+        updateBottomMenu(Screen.CHARTS)
+    }
+
+    private fun updateBottomMenu(screen: Screen) {
+        deselectAllMenuButtons()
+        when (screen) {
+            Screen.DASHBOARD -> {
+                binding.bottomMenu.btnMenuDashboard.isSelected = true
+            }
+            Screen.RECORDS -> {
+                binding.bottomMenu.btnMenuRecords.isSelected = true
+            }
+            Screen.DATA -> {
+                binding.bottomMenu.btnMenuData.isSelected = true
+            }
+            Screen.CHARTS -> {
+                binding.bottomMenu.btnMenuCharts.isSelected = true
+            }
+            Screen.SETTINGS -> {
+                binding.bottomMenu.btnMenuSettings.isSelected = true
+            }
+            else -> binding.bottomMenu.btnMenuDashboard.isSelected = true
+        }
+    }
+
+    private fun deselectAllMenuButtons() {
+        binding.bottomMenu.apply {
+            btnMenuDashboard.isSelected = false
+            btnMenuRecords.isSelected = false
+            btnMenuCharts.isSelected = false
+            btnMenuData.isSelected = false
+            btnMenuSettings.isSelected = false
+        }
     }
 
     private fun initObservers() {
         viewModel.isLoading.observe(this) { isLoading ->
-            if (isLoading) {
-                binding.pbLoadingIndicator.visibility = View.VISIBLE
-            } else {
-                binding.pbLoadingIndicator.visibility = View.GONE
-            }
+            binding.pbLoadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 
@@ -94,5 +134,17 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment, fragment)
             .commit()
+    }
+
+    fun isDashboardNetWorthAnimationPlayed() = isDashboardNetWorthAnimationPlayed
+
+    fun setDashboardNetWorthAnimationPlayed() {
+        isDashboardNetWorthAnimationPlayed = true
+    }
+
+    fun isDashboardChartAnimationPlayed() = isDashboardChartAnimationPlayed
+
+    fun setDashboardChartAnimationPlayed() {
+        isDashboardChartAnimationPlayed = true
     }
 }
