@@ -2,6 +2,7 @@ package com.alexrotariu.finkeepy.ui.main
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AlphaAnimation
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -96,7 +97,6 @@ class MainActivity : AppCompatActivity() {
             Screen.SETTINGS -> {
                 binding.bottomMenu.btnMenuSettings.isSelected = true
             }
-            else -> binding.bottomMenu.btnMenuDashboard.isSelected = true
         }
     }
 
@@ -112,8 +112,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun initObservers() {
         viewModel.isLoading.observe(this) { isLoading ->
-            binding.pbLoadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+            val fadeIn = AlphaAnimation(0f, 1f)
+            fadeIn.duration = 200
+
+            val fadeOut = AlphaAnimation(1f, 0f)
+            fadeOut.duration = 200
+
+            if (isLoading) {
+                binding.pbLoadingIndicator.startAnimation(fadeIn)
+                binding.pbLoadingIndicator.visibility = View.VISIBLE
+            } else {
+                binding.pbLoadingIndicator.startAnimation(fadeOut)
+                binding.pbLoadingIndicator.visibility = View.GONE
+            }
         }
+
     }
 
     private fun setupSwipeRefresh() {
