@@ -3,6 +3,7 @@ package com.alexrotariu.finkeepy.ui.main
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -27,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     private var isDashboardNetWorthAnimationPlayed = false
     private var isDashboardChartAnimationPlayed = false
+
+    private var isFirstStart = true
+
+    private var currentScreen = Screen.DASHBOARD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (applicationContext as App).appComponent.inject(this)
@@ -56,57 +61,110 @@ class MainActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, callback)
     }
 
+    private fun showFragmentContainer() {
+        binding.navHostFragment.visibility = View.VISIBLE
+    }
+
     private fun setOnClickListeners() {
         binding.bottomMenu.apply {
             btnMenuDashboard.setOnClickListener { onDashboardClicked() }
             btnMenuRecords.setOnClickListener { onRecordsClicked() }
             btnMenuCharts.setOnClickListener { onChartsClicked() }
+            btnMenuData.setOnClickListener { onDataClicked() }
+            btnMenuSettings.setOnClickListener { onSettingsClicked() }
         }
     }
 
     private fun onDashboardClicked() {
-        openFragment(DashboardFragment())
-        updateBottomMenu(Screen.DASHBOARD)
+        if (currentScreen != Screen.DASHBOARD) {
+            goToScreen(Screen.DASHBOARD)
+        }
     }
 
     private fun onRecordsClicked() {
-        openFragment(RecordsFragment())
-        updateBottomMenu(Screen.RECORDS)
+        if (currentScreen != Screen.RECORDS) {
+            goToScreen(Screen.RECORDS)
+        }
     }
 
     private fun onChartsClicked() {
-        openFragment(ChartsFragment())
-        updateBottomMenu(Screen.CHARTS)
+        if (currentScreen != Screen.CHARTS) {
+            goToScreen(Screen.CHARTS)
+        }
+    }
+
+    private fun onDataClicked() {
+        Toast.makeText(this, "To be implemented", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onSettingsClicked() {
+        Toast.makeText(this, "To be implemented", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goToScreen(screen: Screen) {
+        val fragment = when (screen) {
+            Screen.DASHBOARD -> {
+                DashboardFragment()
+            }
+            Screen.RECORDS -> {
+                RecordsFragment()
+            }
+            Screen.CHARTS -> {
+                ChartsFragment()
+            }
+            Screen.DATA -> {
+                DashboardFragment()
+            }
+            Screen.SETTINGS -> {
+                DashboardFragment()
+            }
+        }
+
+        openFragment(fragment)
+        updateBottomMenu(screen)
+        currentScreen = screen
     }
 
     private fun updateBottomMenu(screen: Screen) {
-        deselectAllMenuButtons()
+        resetMenuButtons()
         when (screen) {
             Screen.DASHBOARD -> {
                 binding.bottomMenu.btnMenuDashboard.isSelected = true
+                binding.bottomMenu.btnMenuDashboard.isEnabled = false
             }
             Screen.RECORDS -> {
                 binding.bottomMenu.btnMenuRecords.isSelected = true
+                binding.bottomMenu.btnMenuRecords.isEnabled = false
             }
             Screen.DATA -> {
                 binding.bottomMenu.btnMenuData.isSelected = true
+                binding.bottomMenu.btnMenuData.isEnabled = false
             }
             Screen.CHARTS -> {
                 binding.bottomMenu.btnMenuCharts.isSelected = true
+                binding.bottomMenu.btnMenuCharts.isEnabled = false
             }
             Screen.SETTINGS -> {
                 binding.bottomMenu.btnMenuSettings.isSelected = true
+                binding.bottomMenu.btnMenuSettings.isEnabled = false
             }
         }
     }
 
-    private fun deselectAllMenuButtons() {
+    private fun resetMenuButtons() {
         binding.bottomMenu.apply {
+            // deselect all buttons
             btnMenuDashboard.isSelected = false
             btnMenuRecords.isSelected = false
             btnMenuCharts.isSelected = false
             btnMenuData.isSelected = false
             btnMenuSettings.isSelected = false
+            // enable all buttons
+            btnMenuDashboard.isEnabled = true
+            btnMenuRecords.isEnabled = true
+            btnMenuCharts.isEnabled = true
+            btnMenuData.isEnabled = true
+            btnMenuSettings.isEnabled = true
         }
     }
 
@@ -124,6 +182,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.pbLoadingIndicator.startAnimation(fadeOut)
                 binding.pbLoadingIndicator.visibility = View.GONE
+            }
+
+            if (!isLoading && isFirstStart) {
+                isFirstStart = false
+                showFragmentContainer()
             }
         }
 
