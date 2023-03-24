@@ -24,14 +24,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/main_nav_graph" />
+            app:navGraph="@navigation/main_nav_graph"
+            tools:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/pbLoadingIndicator"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primary_transparent"
-            android:indeterminateTint="@color/white"
+            android:background="@color/white_transparent"
+            android:indeterminateTint="@color/primary"
             android:padding="170dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

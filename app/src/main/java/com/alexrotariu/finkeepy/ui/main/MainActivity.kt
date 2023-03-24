@@ -3,11 +3,13 @@ package com.alexrotariu.finkeepy.ui.main
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
@@ -127,44 +129,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateBottomMenu(screen: Screen) {
         resetMenuButtons()
-        when (screen) {
-            Screen.DASHBOARD -> {
-                binding.bottomMenu.btnMenuDashboard.isSelected = true
-                binding.bottomMenu.btnMenuDashboard.isEnabled = false
+
+        binding.bottomMenu.apply {
+            val button = when (screen) {
+                Screen.DASHBOARD -> btnMenuDashboard
+                Screen.RECORDS -> btnMenuRecords
+                Screen.CHARTS -> btnMenuCharts
+                Screen.DATA -> btnMenuData
+                Screen.SETTINGS -> btnMenuSettings
             }
-            Screen.RECORDS -> {
-                binding.bottomMenu.btnMenuRecords.isSelected = true
-                binding.bottomMenu.btnMenuRecords.isEnabled = false
-            }
-            Screen.DATA -> {
-                binding.bottomMenu.btnMenuData.isSelected = true
-                binding.bottomMenu.btnMenuData.isEnabled = false
-            }
-            Screen.CHARTS -> {
-                binding.bottomMenu.btnMenuCharts.isSelected = true
-                binding.bottomMenu.btnMenuCharts.isEnabled = false
-            }
-            Screen.SETTINGS -> {
-                binding.bottomMenu.btnMenuSettings.isSelected = true
-                binding.bottomMenu.btnMenuSettings.isEnabled = false
-            }
+
+            button.isSelected = true
+            button.isEnabled = false
         }
+
     }
 
     private fun resetMenuButtons() {
-        binding.bottomMenu.apply {
-            // deselect all buttons
-            btnMenuDashboard.isSelected = false
-            btnMenuRecords.isSelected = false
-            btnMenuCharts.isSelected = false
-            btnMenuData.isSelected = false
-            btnMenuSettings.isSelected = false
-            // enable all buttons
-            btnMenuDashboard.isEnabled = true
-            btnMenuRecords.isEnabled = true
-            btnMenuCharts.isEnabled = true
-            btnMenuData.isEnabled = true
-            btnMenuSettings.isEnabled = true
+        binding.bottomMenu.root.children.forEach { view ->
+            if (view is ImageButton) {
+                view.isSelected = false
+                view.isEnabled = true
+            }
         }
     }
 
