@@ -5,5 +5,4 @@ enum class Screen {
     RECORDS,
     CHARTS,
     DATA,
-    SETTINGS
 }

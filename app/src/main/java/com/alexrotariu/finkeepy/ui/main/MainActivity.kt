@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity() {
             btnMenuRecords.setOnClickListener { onRecordsClicked() }
             btnMenuCharts.setOnClickListener { onChartsClicked() }
             btnMenuData.setOnClickListener { onDataClicked() }
-            btnMenuSettings.setOnClickListener { onSettingsClicked() }
         }
     }
 
@@ -99,10 +98,6 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "To be implemented", Toast.LENGTH_SHORT).show()
     }
 
-    private fun onSettingsClicked() {
-        Toast.makeText(this, "To be implemented", Toast.LENGTH_SHORT).show()
-    }
-
     private fun goToScreen(screen: Screen) {
         val fragment = when (screen) {
             Screen.DASHBOARD -> {
@@ -115,9 +110,6 @@ class MainActivity : AppCompatActivity() {
                 ChartsFragment()
             }
             Screen.DATA -> {
-                DashboardFragment()
-            }
-            Screen.SETTINGS -> {
                 DashboardFragment()
             }
         }
@@ -136,7 +128,6 @@ class MainActivity : AppCompatActivity() {
                 Screen.RECORDS -> btnMenuRecords
                 Screen.CHARTS -> btnMenuCharts
                 Screen.DATA -> btnMenuData
-                Screen.SETTINGS -> btnMenuSettings
             }
 
             button.isSelected = true

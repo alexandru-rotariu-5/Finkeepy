@@ -11,6 +11,7 @@
     <color name="red">#F679A4</color>
     <color name="black">#FF000000</color>
     <color name="dark_grey">#323232</color>
+    <color name="dark_grey_transparent">#41323232</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_transparent">#80FFFFFF</color>
     <color name="color_background">@color/white</color>
