@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 if (currentFragment is DashboardFragment) {
                     finish()
                 } else {
-                    openFragment(DashboardFragment())
+                    goToScreen(Screen.DASHBOARD)
                 }
             }
         }
