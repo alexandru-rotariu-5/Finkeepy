@@ -18,6 +18,7 @@ import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
 import com.alexrotariu.finkeepy.ui.main.records.RecordAdapter
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
+import com.alexrotariu.finkeepy.ui.models.Screen
 import com.alexrotariu.finkeepy.ui.models.ValueType
 import com.alexrotariu.finkeepy.utils.StringUtils
 import com.alexrotariu.finkeepy.utils.capitalize
@@ -96,6 +97,8 @@ class DashboardFragment : Fragment() {
             isHighlightPerTapEnabled = false
             isHighlightPerDragEnabled = false
 
+            setTouchEnabled(false)
+
             setNoDataText(getString(R.string.no_records_available))
             setNoDataTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
         }
@@ -168,7 +171,7 @@ class DashboardFragment : Fragment() {
 
     private fun initClickListeners() {
         binding.tvSeeAllRecords.setOnClickListener {
-            (activity as MainActivity).openFragment(RecordsFragment())
+            (activity as MainActivity).goToScreen(Screen.RECORDS)
         }
     }
 

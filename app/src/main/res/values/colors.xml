@@ -21,8 +21,10 @@
     <color name="color_loss">@color/primary_light</color>
 
     <!-- Charts -->
+
+    <!-- Value types -->
     <color name="color_chart_net_worth">@color/primary</color>
     <color name="color_chart_income">#804826</color>
-    <color name="color_chart_expense">#BFA18E</color>
-    <color name="color_chart_cashflow">@color/primary_light</color>
+    <color name="color_chart_expense">@color/primary_light</color>
+    <color name="color_chart_cashflow">#BFA18E</color>
 </resources>

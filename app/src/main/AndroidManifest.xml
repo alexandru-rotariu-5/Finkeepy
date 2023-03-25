@@ -29,6 +29,33 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name="com.alexrotariu.finkeepy.ui.settings.SettingsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Finkeepy">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name="com.alexrotariu.finkeepy.ui.notifications.NotificationsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Finkeepy">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name="com.alexrotariu.finkeepy.ui.profile.ProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Finkeepy">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
 </manifest>

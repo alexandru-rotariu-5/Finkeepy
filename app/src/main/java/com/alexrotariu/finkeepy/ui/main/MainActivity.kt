@@ -1,10 +1,10 @@
 package com.alexrotariu.finkeepy.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -16,8 +16,16 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
 import com.alexrotariu.finkeepy.ui.main.charts.ChartsFragment
 import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
+import com.alexrotariu.finkeepy.ui.main.data.DataFragment
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
 import com.alexrotariu.finkeepy.ui.models.Screen
+import com.alexrotariu.finkeepy.ui.notifications.NotificationsActivity
+import com.alexrotariu.finkeepy.ui.profile.ProfileActivity
+import com.alexrotariu.finkeepy.ui.settings.SettingsActivity
+import kotlinx.android.synthetic.main.activity_main.view.clHeader
+import kotlinx.android.synthetic.main.header_main.view.ivNotifications
+import kotlinx.android.synthetic.main.header_main.view.ivSettings
+import kotlinx.android.synthetic.main.header_main.view.ivUserProfile
 import javax.inject.Inject
 
 
@@ -74,6 +82,18 @@ class MainActivity : AppCompatActivity() {
             btnMenuCharts.setOnClickListener { onChartsClicked() }
             btnMenuData.setOnClickListener { onDataClicked() }
         }
+
+        binding.clContainer.clHeader.ivSettings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        binding.clContainer.clHeader.ivNotifications.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
+
+        binding.clContainer.clHeader.ivUserProfile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
     }
 
     private fun onDashboardClicked() {
@@ -95,10 +115,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onDataClicked() {
-        Toast.makeText(this, "To be implemented", Toast.LENGTH_SHORT).show()
+        if (currentScreen != Screen.DATA) {
+            goToScreen(Screen.DATA)
+        }
     }
 
-    private fun goToScreen(screen: Screen) {
+    fun goToScreen(screen: Screen) {
         val fragment = when (screen) {
             Screen.DASHBOARD -> {
                 DashboardFragment()
@@ -110,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                 ChartsFragment()
             }
             Screen.DATA -> {
-                DashboardFragment()
+                DataFragment()
             }
         }
 
@@ -183,7 +205,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun openFragment(fragment: Fragment) {
+    private fun openFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment, fragment)
             .commit()
