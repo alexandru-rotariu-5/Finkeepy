@@ -1,14 +1,16 @@
 package com.alexrotariu.finkeepy.ui.main.records
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentRecordsBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
+import kotlinx.android.synthetic.main.fragment_records.view.nsvRecords
 
 class RecordsFragment : Fragment() {
 
@@ -29,6 +31,8 @@ class RecordsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecordsAdapter()
         initObservers()
+        initScrollListener()
+        setupMainHeaderTitle()
     }
 
     private fun getViewModel() = (activity as MainActivity).viewModel
@@ -38,6 +42,41 @@ class RecordsFragment : Fragment() {
         binding.rvRecords.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recordAdapter
+        }
+    }
+
+    private fun initScrollListener() {
+        binding.root.nsvRecords.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            updateMainHeaderElevation(scrollY)
+            updateMainHeaderTitleY(scrollY)
+        }
+    }
+
+    private fun updateMainHeaderElevation(scrollY: Int) {
+        val mainHeaderElevation = when {
+            scrollY in 0..80 -> (scrollY / 2).toFloat()
+            else -> 40f
+        }
+
+        (activity as MainActivity).setMainHeaderElevation(mainHeaderElevation)
+    }
+
+    private fun updateMainHeaderTitleY(scrollY: Int) {
+        val mainHeaderTitleY = when {
+            scrollY in 70..120 -> 130f - (2.6f * (scrollY - 70))
+            scrollY > 120 -> 0f
+            else -> 130f
+        }
+
+        (activity as MainActivity).setMainHeaderTitleY(mainHeaderTitleY)
+    }
+
+
+    private fun setupMainHeaderTitle() {
+        (activity as MainActivity).apply {
+            setMainHeaderTitle(getString(R.string.records))
+            setMainHeaderTitleY(130f)
+            showMainHeaderTitle()
         }
     }
 
@@ -51,5 +90,10 @@ class RecordsFragment : Fragment() {
 
     private fun updateRecords(records: List<Record?>?) {
         recordAdapter.setFullList(records)
+    }
+
+    override fun onDestroy() {
+        (activity as MainActivity).hideMainHeaderTitle()
+        super.onDestroy()
     }
 }

@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.ViewCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.alexrotariu.finkeepy.App
@@ -139,6 +140,26 @@ class MainActivity : AppCompatActivity() {
         openFragment(fragment)
         updateBottomMenu(screen)
         currentScreen = screen
+    }
+
+    fun setMainHeaderElevation(elevation: Float) {
+        ViewCompat.setElevation(binding.clHeader.root, elevation)
+    }
+
+    fun showMainHeaderTitle() {
+        binding.clHeader.tvTitle.visibility = View.VISIBLE
+    }
+
+    fun hideMainHeaderTitle() {
+        binding.clHeader.tvTitle.visibility = View.GONE
+    }
+
+    fun setMainHeaderTitle(title: String) {
+        binding.clHeader.tvTitle.text = title
+    }
+
+    fun setMainHeaderTitleY(y: Float) {
+        binding.clHeader.tvTitle.translationY = y
     }
 
     private fun updateBottomMenu(screen: Screen) {
