@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@color/dark_grey" />
+            android:background="@color/secondary" />
 
         <TextView
             android:id="@+id/tvYear"
@@ -33,7 +33,7 @@
             android:layout_marginHorizontal="20dp"
             android:fontFamily="@font/bold"
             android:textAlignment="center"
-            android:textColor="@color/primary"
+            android:textColor="@color/highlighted_text"
             android:textSize="16sp"
             tools:text="2023" />
 
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@color/dark_grey" />
+            android:background="@color/secondary" />
 
     </LinearLayout>
 
@@ -65,7 +65,7 @@
             android:fontFamily="@font/bold"
             android:layout_marginBottom="4dp"
             android:textAlignment="textEnd"
-            android:textColor="@color/primary"
+            android:textColor="@color/highlighted_text"
             android:textSize="24sp"
             tools:text="Feb" />
 

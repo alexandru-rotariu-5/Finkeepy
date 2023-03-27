@@ -67,14 +67,14 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
 
             val cashflow = record.getCashflow(previousNetWorth)
 
-            val primaryTextColor = ContextCompat.getColor(
+            val mainTextColor = ContextCompat.getColor(
                 binding.root.context,
-                if (isFirstItem) R.color.white else R.color.primary
+                if (isFirstItem) R.color.white else R.color.normal_text
             )
 
             val secondaryTextColor = ContextCompat.getColor(
                 binding.root.context,
-                if (isFirstItem) R.color.white else R.color.primary_light
+                if (isFirstItem) R.color.white else R.color.normal_text_secondary
             )
 
             with(binding) {
@@ -86,10 +86,10 @@ class RecordAdapter(private val limit: Int = 10_000, private val fragmentManager
                     }
                 )
 
-                tvNetWorth.setTextColor(primaryTextColor)
-                tvIncome.setTextColor(primaryTextColor)
+                tvNetWorth.setTextColor(mainTextColor)
+                tvIncome.setTextColor(mainTextColor)
                 tvExpense.setTextColor(secondaryTextColor)
-                tvCashflow.setTextColor(if (cashflow > 0) primaryTextColor else secondaryTextColor)
+                tvCashflow.setTextColor(if (cashflow > 0) mainTextColor else secondaryTextColor)
 
                 if (record.timestamp.month == Month.DECEMBER && !isFirstItem) {
                     llYear.visibility = View.VISIBLE

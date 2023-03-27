@@ -2,14 +2,14 @@
 <resources>
     <!-- Splash Screen Theme. -->
     <style name="Theme.FinkeepySplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/dark_grey</item>
+        <item name="windowSplashScreenBackground">@color/secondary</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
         <item name="windowSplashScreenAnimationDuration">300</item>
         <item name="postSplashScreenTheme">@style/Theme.Finkeepy</item>
 
         <!-- Status bar and Nav bar configs -->
-        <item name="android:statusBarColor" >@color/dark_grey</item>
-        <item name="android:navigationBarColor">@color/dark_grey</item>
+        <item name="android:statusBarColor" >@color/secondary</item>
+        <item name="android:navigationBarColor">@color/secondary</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

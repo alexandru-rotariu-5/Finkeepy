@@ -27,7 +27,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/bold"
                 android:text="@string/records"
-                android:textColor="@color/primary"
+                android:textColor="@color/normal_text"
                 android:textSize="32sp" />
 
             <include

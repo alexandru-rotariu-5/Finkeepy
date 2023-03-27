@@ -15,7 +15,7 @@
 <!--        android:layout_marginBottom="20dp"-->
 <!--        android:fontFamily="@font/bold"-->
 <!--        android:text="@string/charts"-->
-<!--        android:textColor="@color/primary"-->
+<!--        android:textColor="@color/text"-->
 <!--        android:textSize="32sp"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
@@ -47,7 +47,7 @@
             android:fontFamily="@font/bold"
             android:text="@string/net_worth"
             android:textAlignment="center"
-            android:textColor="@color/primary"
+            android:textColor="@color/normal_text"
             android:textSize="12sp" />
 
         <!-- Income -->
@@ -63,7 +63,7 @@
             android:fontFamily="@font/bold"
             android:text="@string/income"
             android:textAlignment="center"
-            android:textColor="@color/primary"
+            android:textColor="@color/normal_text"
             android:textSize="12sp" />
 
         <!-- Expense -->
@@ -79,7 +79,7 @@
             android:fontFamily="@font/bold"
             android:text="@string/expense"
             android:textAlignment="center"
-            android:textColor="@color/primary"
+            android:textColor="@color/normal_text"
             android:textSize="12sp" />
 
         <!-- Cash Flow -->
@@ -95,7 +95,7 @@
             android:fontFamily="@font/bold"
             android:text="@string/cashflow"
             android:textAlignment="center"
-            android:textColor="@color/primary"
+            android:textColor="@color/normal_text"
             android:textSize="12sp" />
 
     </LinearLayout>

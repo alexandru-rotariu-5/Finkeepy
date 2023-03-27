@@ -17,7 +17,6 @@ import com.alexrotariu.finkeepy.data.models.Record
 import com.alexrotariu.finkeepy.databinding.FragmentDashboardBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
 import com.alexrotariu.finkeepy.ui.main.records.RecordAdapter
-import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
 import com.alexrotariu.finkeepy.ui.models.Screen
 import com.alexrotariu.finkeepy.ui.models.ValueType
 import com.alexrotariu.finkeepy.utils.StringUtils
@@ -64,12 +63,14 @@ class DashboardFragment : Fragment() {
 
     private fun getViewModel() = (activity as MainActivity).viewModel
 
-    private fun isNetWorthAnimationPlayed() = (activity as MainActivity).isDashboardNetWorthAnimationPlayed()
+    private fun isNetWorthAnimationPlayed() =
+        (activity as MainActivity).isDashboardNetWorthAnimationPlayed()
 
     private fun setNetWorthAnimationPlayed() =
         (activity as MainActivity).setDashboardNetWorthAnimationPlayed()
 
-    private fun isChartAnimationPlayed() = (activity as MainActivity).isDashboardChartAnimationPlayed()
+    private fun isChartAnimationPlayed() =
+        (activity as MainActivity).isDashboardChartAnimationPlayed()
 
     private fun setChartAnimationPlayed() =
         (activity as MainActivity).setDashboardChartAnimationPlayed()
@@ -82,7 +83,7 @@ class DashboardFragment : Fragment() {
                 setDrawGridLines(false)
                 setDrawAxisLine(false)
                 setDrawLabels(true)
-                textColor = ContextCompat.getColor(requireContext(), R.color.primary)
+                textColor = ContextCompat.getColor(requireContext(), R.color.normal_text)
             }
 
             axisRight.apply {
@@ -116,7 +117,7 @@ class DashboardFragment : Fragment() {
                 override fun getFormattedValue(value: Float): String? =
                     formatChartLabelToDate(value)
             }
-            textColor = ContextCompat.getColor(requireContext(), R.color.primary)
+            textColor = ContextCompat.getColor(requireContext(), R.color.normal_text)
         }
     }
 
@@ -181,7 +182,7 @@ class DashboardFragment : Fragment() {
                 updateNetWorthView(getViewModel().getNetWorth())
                 updateLastMonthCashflowView(getViewModel().getLastMonthCashflow())
                 updateRecords(records)
-                updateChartData(getViewModel().getChartEntries(ValueType.NET_WORTH))
+                updateChartData(getViewModel().getChartEntries(ValueType.NET_WORTH).takeLast(5))
             }
         }
     }

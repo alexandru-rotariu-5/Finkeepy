@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
-        android:textColor="@color/dark_grey"
+        android:textColor="@color/secondary"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/regular"
-        android:textColor="@color/primary"
+        android:textColor="@color/normal_text"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
             android:text="@string/earned"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/secondary"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/tvIncomeValue"
             app:layout_constraintStart_toStartOf="parent" />
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
             android:text="@string/spent"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/secondary"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/tvExpenseValue"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -124,7 +124,7 @@
         android:id="@+id/vCashflowChartSeparator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/dark_grey"
+        android:background="@color/secondary"
         app:layout_constraintTop_toBottomOf="@id/clCashflowChart" />
 
     <TextView
@@ -134,7 +134,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/regular"
         android:text="@string/your_net_worth_increased_by"
-        android:textColor="@color/dark_grey"
+        android:textColor="@color/secondary"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

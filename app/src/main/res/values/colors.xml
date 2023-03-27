@@ -2,19 +2,29 @@
 <resources>
 
     <!-- General -->
+
+    <!-- Primary -->
     <color name="primary">#FFFF914D</color>
-    <color name="primary_transparent">#80FF914D</color>
     <color name="primary_light">#FFFFC099</color>
-    <color name="primary_light_transparent">#80FFC099</color>
+    <color name="primary_transparent">#80FF914D</color>
+
+    <!-- Secondary -->
+    <color name="secondary">#323232</color>
+    <color name="secondary_light">#B5B5B5</color>
+    <color name="secondary_transparent">#41323232</color>
 
     <color name="green">#1ECCA9</color>
     <color name="red">#F679A4</color>
     <color name="black">#FF000000</color>
-    <color name="dark_grey">#323232</color>
-    <color name="dark_grey_transparent">#41323232</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_transparent">#80FFFFFF</color>
     <color name="color_background">@color/white</color>
+
+    <!-- Text -->
+    <color name="normal_text">@color/secondary</color>
+    <color name="normal_text_secondary">@color/secondary_light</color>
+    <color name="highlighted_text">@color/primary</color>
+    <color name="highlighted_text_secondary">@color/primary_light</color>
 
     <!-- Record -->
     <color name="color_profit">@color/primary</color>
@@ -24,7 +34,7 @@
 
     <!-- Value types -->
     <color name="color_chart_net_worth">@color/primary</color>
-    <color name="color_chart_income">#804826</color>
+    <color name="color_chart_income">@color/secondary</color>
     <color name="color_chart_expense">@color/primary_light</color>
-    <color name="color_chart_cashflow">#BFA18E</color>
+    <color name="color_chart_cashflow">@color/secondary_light</color>
 </resources>

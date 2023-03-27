@@ -74,7 +74,7 @@ class ChartsFragment : Fragment() {
                 setDrawGridLines(false)
                 setDrawAxisLine(false)
                 setDrawLabels(true)
-                textColor = ContextCompat.getColor(requireContext(), R.color.primary)
+                textColor = ContextCompat.getColor(requireContext(), R.color.normal_text)
             }
 
             axisRight.apply {
@@ -105,7 +105,7 @@ class ChartsFragment : Fragment() {
                 override fun getFormattedValue(value: Float): String? =
                     formatChartLabelToDate(value)
             }
-            textColor = ContextCompat.getColor(requireContext(), R.color.primary)
+            textColor = ContextCompat.getColor(requireContext(), R.color.normal_text)
         }
     }
 
