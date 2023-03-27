@@ -35,6 +35,8 @@ class ChartsFragment : Fragment() {
     private var _binding: FragmentChartsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var mainActivity: MainActivity
+
     private val animationDuration = 500
 
     @Inject
@@ -51,13 +53,18 @@ class ChartsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initMainActivity()
         initObservers()
         initClickListeners()
         setupChart(binding.lcLineChartMultiple)
         setupChart(binding.bcBarChartMultiple)
     }
 
-    private fun getMainViewModel() = (activity as MainActivity).viewModel
+    private fun initMainActivity() {
+        mainActivity = activity as MainActivity
+    }
+
+    private fun getMainViewModel() = mainActivity.viewModel
 
     private fun setupChart(chart: BarLineChartBase<*>) {
         chart.apply {

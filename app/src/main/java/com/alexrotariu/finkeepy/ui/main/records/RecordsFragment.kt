@@ -16,6 +16,8 @@ class RecordsFragment : Fragment() {
 
     private var _binding: FragmentRecordsBinding? = null
     private val binding get() = _binding!!
+    
+    private lateinit var mainActivity: MainActivity
 
     private lateinit var recordAdapter: RecordAdapter
 
@@ -29,13 +31,18 @@ class RecordsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initMainActivity()
         initRecordsAdapter()
         initObservers()
         initScrollListener()
         setupMainHeaderTitle()
     }
 
-    private fun getViewModel() = (activity as MainActivity).viewModel
+    private fun initMainActivity() {
+        mainActivity = activity as MainActivity
+    }
+
+    private fun getMainViewModel() = mainActivity.viewModel
 
     private fun initRecordsAdapter() {
         recordAdapter = RecordAdapter(fragmentManager = childFragmentManager)
@@ -53,12 +60,12 @@ class RecordsFragment : Fragment() {
     }
 
     private fun updateMainHeaderElevation(scrollY: Int) {
-        val mainHeaderElevation = when {
-            scrollY in 0..80 -> (scrollY / 2).toFloat()
+        val mainHeaderElevation = when (scrollY) {
+            in 0..80 -> (scrollY / 2).toFloat()
             else -> 40f
         }
 
-        (activity as MainActivity).setMainHeaderElevation(mainHeaderElevation)
+        mainActivity.setMainHeaderElevation(mainHeaderElevation)
     }
 
     private fun updateMainHeaderTitleY(scrollY: Int) {
@@ -68,12 +75,12 @@ class RecordsFragment : Fragment() {
             else -> 130f
         }
 
-        (activity as MainActivity).setMainHeaderTitleY(mainHeaderTitleY)
+        mainActivity.setMainHeaderTitleY(mainHeaderTitleY)
     }
 
 
     private fun setupMainHeaderTitle() {
-        (activity as MainActivity).apply {
+        mainActivity.apply {
             setMainHeaderTitle(getString(R.string.records))
             setMainHeaderTitleY(130f)
             showMainHeaderTitle()
@@ -81,7 +88,7 @@ class RecordsFragment : Fragment() {
     }
 
     private fun initObservers() {
-        getViewModel().records.observe(viewLifecycleOwner) { records ->
+        getMainViewModel().records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
                 updateRecords(records)
             }
@@ -91,9 +98,10 @@ class RecordsFragment : Fragment() {
     private fun updateRecords(records: List<Record?>?) {
         recordAdapter.setFullList(records)
     }
-
+    
     override fun onDestroy() {
-        (activity as MainActivity).hideMainHeaderTitle()
+        mainActivity.hideMainHeaderTitle()
+        mainActivity.setMainHeaderElevation(0f)
         super.onDestroy()
     }
 }

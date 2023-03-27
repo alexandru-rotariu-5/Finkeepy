@@ -28,6 +28,7 @@
     <string name="your_net_worth_decreased_by">Your net worth decreased by</string>
 
     <!-- Charts -->
+    <string name="charts">Charts</string>
     <string name="line_chart">Line</string>
     <string name="bar_chart">Bar</string>
 
