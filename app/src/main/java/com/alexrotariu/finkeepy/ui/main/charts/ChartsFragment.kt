@@ -1,6 +1,5 @@
 package com.alexrotariu.finkeepy.ui.main.charts
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import com.alexrotariu.finkeepy.databinding.FragmentChartsBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
 import com.alexrotariu.finkeepy.ui.models.ChartType
 import com.alexrotariu.finkeepy.ui.models.ValueType
+import com.alexrotariu.finkeepy.utils.getShortMonthAndYear
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.components.XAxis
@@ -56,8 +56,10 @@ class ChartsFragment : Fragment() {
         initMainActivity()
         initObservers()
         initClickListeners()
+        setInitialTimeRange()
         setupChart(binding.lcLineChartMultiple)
         setupChart(binding.bcBarChartMultiple)
+        setupTimeRangeSlider()
     }
 
     private fun initMainActivity() {
@@ -65,6 +67,15 @@ class ChartsFragment : Fragment() {
     }
 
     private fun getMainViewModel() = mainActivity.viewModel
+
+    private fun setInitialTimeRange() {
+        viewModel.setTimeRange(
+            Pair(
+                0f,
+                getMainViewModel().records.value?.size?.toFloat() ?: 0f
+            )
+        )
+    }
 
     private fun setupChart(chart: BarLineChartBase<*>) {
         chart.apply {
@@ -88,6 +99,8 @@ class ChartsFragment : Fragment() {
 
             isHighlightPerTapEnabled = false
             isHighlightPerDragEnabled = false
+
+            setTouchEnabled(false)
 
             setNoDataText(getString(R.string.no_records_available))
             setNoDataTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
@@ -167,17 +180,6 @@ class ChartsFragment : Fragment() {
         binding.bcBarChartMultiple.invalidate()
     }
 
-    private fun getLineChartFillGradient(colorResource: Int): GradientDrawable {
-        val gradient = GradientDrawable()
-        gradient.colors = intArrayOf(
-            ContextCompat.getColor(requireContext(), colorResource),
-            ContextCompat.getColor(requireContext(), R.color.white)
-        )
-        gradient.gradientType = GradientDrawable.LINEAR_GRADIENT
-        gradient.orientation = GradientDrawable.Orientation.TOP_BOTTOM
-        return gradient
-    }
-
     private fun mapChartEntriesToBarEntries(entries: List<Entry>): List<BarEntry> {
         return entries.map { entry ->
             BarEntry(entry.x, entry.y)
@@ -188,6 +190,7 @@ class ChartsFragment : Fragment() {
         initRecordsObserver()
         initChartTypeObserver()
         initChartValueTypesObserver()
+        initTimeRangeObserver()
     }
 
     private fun initRecordsObserver() {
@@ -216,6 +219,12 @@ class ChartsFragment : Fragment() {
             }
             updateChartData(createValueTypeEntriesPairList())
             updateSelectChartTypeViews()
+        }
+    }
+
+    private fun initTimeRangeObserver() {
+        viewModel.timeRange.observe(viewLifecycleOwner) {
+            updateChartData(createValueTypeEntriesPairList())
         }
     }
 
@@ -279,7 +288,7 @@ class ChartsFragment : Fragment() {
         if (viewModel.chartValueTypes.value?.contains(valueType) == true) {
             R.color.white
         } else {
-            R.color.primary
+            R.color.normal_text
         }
 
     private fun updateSelectChartTypeViews() {
@@ -303,15 +312,15 @@ class ChartsFragment : Fragment() {
     private fun getSelectedChartTypeViewImageResource(chartType: ChartType) =
         if (viewModel.chartType.value == chartType) {
             when (chartType) {
-                ChartType.LINE -> R.drawable.ic_line_chart_white
-                ChartType.AREA -> R.drawable.ic_area_chart_white
-                ChartType.BAR -> R.drawable.ic_bar_chart_white
+                ChartType.LINE -> R.drawable.ic_line_chart_selected
+                ChartType.AREA -> R.drawable.ic_area_chart_selected
+                ChartType.BAR -> R.drawable.ic_bar_chart_selected
             }
         } else {
             when (chartType) {
-                ChartType.LINE -> R.drawable.ic_line_chart_primary
-                ChartType.AREA -> R.drawable.ic_area_chart_primary
-                ChartType.BAR -> R.drawable.ic_bar_chart_primary
+                ChartType.LINE -> R.drawable.ic_line_chart_unselected
+                ChartType.AREA -> R.drawable.ic_area_chart_unselected
+                ChartType.BAR -> R.drawable.ic_bar_chart_unselected
             }
         }
 
@@ -361,5 +370,37 @@ class ChartsFragment : Fragment() {
         } ?: emptyList()
 
     private fun getEntriesForValueType(valueType: ValueType) =
-        getMainViewModel().getChartEntries(valueType)
+        getMainViewModel().getChartEntries(valueType, viewModel.timeRange.value ?: Pair(0f, 0f))
+
+    private fun setupTimeRangeSlider() {
+        val timeRange = getMainViewModel().getTimeRange()
+        val min = 0f
+        val max = timeRange.size.toFloat() - 1
+
+        binding.rsTimeRange.apply {
+            valueFrom = min
+            valueTo = max
+            stepSize = 1f
+            values = listOf(min, max)
+
+            setLabelFormatter { value: Float ->
+                timeRange[value.toInt()]?.getShortMonthAndYear() ?: ""
+            }
+
+            addOnChangeListener { _, _, fromUser ->
+                if (fromUser) {
+                    onTimeRangeSliderChange()
+                }
+            }
+        }
+    }
+
+    private fun onTimeRangeSliderChange() {
+        viewModel.setTimeRange(
+            Pair(
+                binding.rsTimeRange.values[0],
+                binding.rsTimeRange.values[1] + 1
+            )
+        )
+    }
 }

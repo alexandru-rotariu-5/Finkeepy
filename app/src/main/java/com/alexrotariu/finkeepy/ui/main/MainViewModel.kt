@@ -9,6 +9,7 @@ import com.alexrotariu.finkeepy.data.repositories.RecordsRepository
 import com.alexrotariu.finkeepy.ui.models.ValueType
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val recordsRepository: RecordsRepository) :
@@ -43,9 +44,13 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
             ?: 0.0
     }
 
-    fun getChartEntries(valueType: ValueType): List<Entry> {
+    fun getChartEntries(
+        valueType: ValueType,
+        range: Pair<Float, Float> = Pair(0f, records.value?.size?.toFloat() ?: 0f)
+    ): List<Entry> {
         val entries: MutableList<Entry> = mutableListOf()
-        val reversedRecords = records.value?.reversed()
+        val reversedRecords =
+            records.value?.reversed()?.subList(range.first.toInt(), range.second.toInt())
 
         reversedRecords?.forEachIndexed { index, record ->
             val previousNetWorth = reversedRecords.getOrNull(index - 1)?.netWorth ?: 0.0
@@ -61,5 +66,9 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
             }
         }
         return entries
+    }
+
+    fun getTimeRange(): List<LocalDateTime?> {
+        return records.value?.reversed()?.map { it?.timestamp } ?: listOf()
     }
 }

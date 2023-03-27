@@ -7,19 +7,19 @@
     android:background="@color/color_background"
     tools:context=".ui.main.charts.ChartsFragment">
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvCharts"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:fontFamily="@font/bold"-->
-<!--        android:text="@string/charts"-->
-<!--        android:textColor="@color/text"-->
-<!--        android:textSize="32sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvCharts"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="20dp"-->
+    <!--        android:layout_marginBottom="20dp"-->
+    <!--        android:fontFamily="@font/bold"-->
+    <!--        android:text="@string/charts"-->
+    <!--        android:textColor="@color/text"-->
+    <!--        android:textSize="32sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <LinearLayout
         android:id="@+id/llValueTypes"
@@ -124,20 +124,19 @@
         app:layout_constraintTop_toBottomOf="@id/llValueTypes"
         tools:visibility="visible" />
 
-    <!--    <SeekBar-->
-    <!--        android:id="@+id/sbTimeRange"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:max="100"-->
-    <!--        android:paddingStart="20dp"-->
-    <!--        android:paddingEnd="20dp"-->
-    <!--        android:progress="0"-->
-    <!--        android:secondaryProgress="100"-->
-    <!--        android:splitTrack="false"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/bcBarChartMultiple" />-->
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/rsTimeRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:stepSize="10.0"
+        android:valueFrom="0.0"
+        android:valueTo="100.0"
+        app:labelBehavior="withinBounds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bcBarChartMultiple"
+        app:values="@array/initial_time_range_slider_values" />
 
     <LinearLayout
         android:id="@+id/llChartTypes"
@@ -151,7 +150,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bcBarChartMultiple">
+        app:layout_constraintTop_toBottomOf="@id/rsTimeRange">
 
         <!-- Line chart -->
         <ImageView
@@ -160,7 +159,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_line_chart_primary" />
+            android:src="@drawable/ic_line_chart_unselected"
+            tools:background="@drawable/bg_chart_type_selected"
+            tools:src="@drawable/ic_line_chart_selected" />
 
         <!-- Area chart -->
         <ImageView
@@ -170,7 +171,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_area_chart_primary" />
+            android:src="@drawable/ic_area_chart_unselected" />
 
         <!-- Bar chart -->
         <ImageView
@@ -180,7 +181,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_bar_chart_primary" />
+            android:src="@drawable/ic_bar_chart_unselected" />
 
     </LinearLayout>
 
