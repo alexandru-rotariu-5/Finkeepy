@@ -37,6 +37,7 @@ class RecordBottomSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        setClickListeners()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -56,6 +57,15 @@ class RecordBottomSheet(
         return bottomSheetDialog
     }
 
+    private fun setClickListeners() {
+        binding.vIncome.setOnClickListener {
+            it.bringToFront()
+        }
+
+        binding.vExpense.setOnClickListener {
+            it.bringToFront()
+        }
+    }
 
     private fun initViews() {
         binding.tvDate.text = record.timestamp.getShortMonthAndYear()
@@ -73,7 +83,7 @@ class RecordBottomSheet(
         val ratio = (if (max == income) expense else income) / max
 
         val maxHeight =
-            (CASHFLOW_CHART_HEIGHT * LayoutUtils.getDpToPx(binding.root.context)).toInt()
+            (CASHFLOW_CHART_HEIGHT * LayoutUtils.getDpToPxDensity(binding.root.context)).toInt()
         val minHeight = (ratio * maxHeight).toInt()
 
         binding.apply {
