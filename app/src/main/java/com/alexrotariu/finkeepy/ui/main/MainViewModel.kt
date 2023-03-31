@@ -39,6 +39,33 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
         return records.value?.get(0)?.netWorth ?: 0.0
     }
 
+    fun getTotalIncome(): Double {
+        return records.value?.sumOf { it?.income ?: 0.0 } ?: 0.0
+    }
+
+    fun getTotalExpense(): Double {
+        val recordsList = records.value!!
+        var totalExpense = 0.0
+        for (i in recordsList.indices) {
+            val previousNetWorth = recordsList.getOrNull(i + 1)?.netWorth ?: 0.0
+            totalExpense += recordsList[i]?.getExpense(previousNetWorth)
+                ?: 0.0
+        }
+        return totalExpense
+    }
+
+    fun getAverageIncome(): Double {
+        return getTotalIncome() / records.value!!.size
+    }
+
+    fun getAverageExpense(): Double {
+        return getTotalExpense() / records.value!!.size
+    }
+
+    fun getAverageCashflow(): Double {
+        return getAverageIncome() - getAverageExpense()
+    }
+
     fun getLastMonthCashflow(): Double {
         return records.value?.get(1)?.netWorth?.let { records.value?.get(0)?.getCashflow(it) }
             ?: 0.0

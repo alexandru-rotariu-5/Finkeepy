@@ -31,8 +31,11 @@
     <string name="charts">Charts</string>
     <string name="line_chart">Line</string>
     <string name="bar_chart">Bar</string>
-
-    <!-- Data -->
-    <string name="data">Data</string>
+    <string name="charts_net_worth">Net worth</string>
+    <string name="total_income">Tot. income</string>
+    <string name="total_expense">Tot. expense</string>
+    <string name="average_cashflow">Avg. cashflow</string>
+    <string name="average_income">Avg. income</string>
+    <string name="average_expense">Avg. expense</string>
 
 </resources>

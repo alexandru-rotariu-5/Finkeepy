@@ -14,6 +14,7 @@ import com.alexrotariu.finkeepy.databinding.FragmentChartsBinding
 import com.alexrotariu.finkeepy.ui.main.MainActivity
 import com.alexrotariu.finkeepy.ui.models.ChartType
 import com.alexrotariu.finkeepy.ui.models.ValueType
+import com.alexrotariu.finkeepy.utils.format
 import com.alexrotariu.finkeepy.utils.getShortMonthAndYear
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarLineChartBase
@@ -197,6 +198,7 @@ class ChartsFragment : Fragment() {
         getMainViewModel().records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
                 updateChartData(createValueTypeEntriesPairList())
+                updateDataValues()
             }
         }
     }
@@ -225,6 +227,7 @@ class ChartsFragment : Fragment() {
     private fun initTimeRangeObserver() {
         viewModel.timeRange.observe(viewLifecycleOwner) {
             updateChartData(createValueTypeEntriesPairList())
+            updateDataValues()
         }
     }
 
@@ -402,5 +405,16 @@ class ChartsFragment : Fragment() {
                 binding.rsTimeRange.values[1] + 1
             )
         )
+    }
+
+    private fun updateDataValues() {
+        binding.apply {
+            tvNetWorthValue.text = getMainViewModel().getNetWorth().format()
+            tvTotalIncomeValue.text = getMainViewModel().getTotalIncome().format()
+            tvTotalExpenseValue.text = getMainViewModel().getTotalExpense().format()
+            tvAverageCashflowValue.text = getMainViewModel().getAverageCashflow().format()
+            tvAverageIncomeValue.text = getMainViewModel().getAverageIncome().format()
+            tvAverageExpenseValue.text = getMainViewModel().getAverageExpense().format()
+        }
     }
 }
