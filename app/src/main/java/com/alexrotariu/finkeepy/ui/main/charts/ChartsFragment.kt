@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.alexrotariu.finkeepy.App
 import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.FragmentChartsBinding
@@ -38,6 +39,8 @@ class ChartsFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
 
+    private lateinit var dataAdapter: DataAdapter
+
     private val animationDuration = 500
 
     @Inject
@@ -61,6 +64,7 @@ class ChartsFragment : Fragment() {
         setupChart(binding.lcLineChartMultiple)
         setupChart(binding.bcBarChartMultiple)
         setupTimeRangeSlider()
+        setupDataAdapter()
     }
 
     private fun initMainActivity() {
@@ -198,7 +202,7 @@ class ChartsFragment : Fragment() {
         getMainViewModel().records.observe(viewLifecycleOwner) { records ->
             if (records != null) {
                 updateChartData(createValueTypeEntriesPairList())
-                updateDataValues()
+                updateDataAdapter()
             }
         }
     }
@@ -227,7 +231,7 @@ class ChartsFragment : Fragment() {
     private fun initTimeRangeObserver() {
         viewModel.timeRange.observe(viewLifecycleOwner) {
             updateChartData(createValueTypeEntriesPairList())
-            updateDataValues()
+            updateDataAdapter()
         }
     }
 
@@ -407,14 +411,31 @@ class ChartsFragment : Fragment() {
         )
     }
 
-    private fun updateDataValues() {
-        binding.apply {
-            tvNetWorthValue.text = getMainViewModel().getNetWorth().format()
-            tvTotalIncomeValue.text = getMainViewModel().getTotalIncome().format()
-            tvTotalExpenseValue.text = getMainViewModel().getTotalExpense().format()
-            tvAverageCashflowValue.text = getMainViewModel().getAverageCashflow().format()
-            tvAverageIncomeValue.text = getMainViewModel().getAverageIncome().format()
-            tvAverageExpenseValue.text = getMainViewModel().getAverageExpense().format()
+    private fun setupDataAdapter() {
+        dataAdapter = DataAdapter()
+        binding.rvData.apply {
+            layoutManager = GridLayoutManager(requireContext(), 3)
+            adapter = dataAdapter
         }
+    }
+
+    private fun getDataList(): List<Data> {
+        val timeRange = viewModel.timeRange.value ?: Pair(0f, 0f)
+        val dataMap = mapOf(
+            R.string.net_worth to getMainViewModel().getNetWorth(timeRange).format(),
+            R.string.total_income to getMainViewModel().getTotalIncome(timeRange).format(),
+            R.string.total_expense to getMainViewModel().getTotalExpense(timeRange).format(),
+            R.string.average_cashflow to getMainViewModel().getAverageCashflow(timeRange).format(),
+            R.string.average_income to getMainViewModel().getAverageIncome(timeRange).format(),
+            R.string.average_expense to getMainViewModel().getAverageExpense(timeRange).format()
+        )
+
+        return dataMap.map { (stringRes, dataValue) ->
+            Data(getString(stringRes), dataValue)
+        }
+    }
+
+    private fun updateDataAdapter() {
+        dataAdapter.submitList(getDataList())
     }
 }

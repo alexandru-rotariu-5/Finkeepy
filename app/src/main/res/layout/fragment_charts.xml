@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,108 +7,113 @@
     android:background="@color/color_background"
     tools:context=".ui.main.charts.ChartsFragment">
 
-    <LinearLayout
-        android:id="@+id/llValueTypes"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:background="@drawable/bg_white_rounded"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/color_background">
 
-        <!-- Net Worth -->
-        <TextView
-            android:id="@+id/tvSelectNetWorth"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/llValueTypes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_chart_value_type_unselected"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="@font/bold"
-            android:text="@string/net_worth"
-            android:textAlignment="center"
-            android:textColor="@color/normal_text"
-            android:textSize="12sp" />
+            android:background="@drawable/bg_white_rounded"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Income -->
-        <TextView
-            android:id="@+id/tvSelectIncome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_chart_value_type_unselected"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="@font/bold"
-            android:text="@string/income"
-            android:textAlignment="center"
-            android:textColor="@color/normal_text"
-            android:textSize="12sp" />
+            <!-- Net Worth -->
+            <TextView
+                android:id="@+id/tvSelectNetWorth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chart_value_type_unselected"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/bold"
+                android:text="@string/net_worth"
+                android:textAlignment="center"
+                android:textColor="@color/normal_text"
+                android:textSize="12sp" />
 
-        <!-- Expense -->
-        <TextView
-            android:id="@+id/tvSelectExpense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_chart_value_type_unselected"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="@font/bold"
-            android:text="@string/expense"
-            android:textAlignment="center"
-            android:textColor="@color/normal_text"
-            android:textSize="12sp" />
+            <!-- Income -->
+            <TextView
+                android:id="@+id/tvSelectIncome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chart_value_type_unselected"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/bold"
+                android:text="@string/income"
+                android:textAlignment="center"
+                android:textColor="@color/normal_text"
+                android:textSize="12sp" />
 
-        <!-- Cash Flow -->
-        <TextView
-            android:id="@+id/tvSelectCashflow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_chart_value_type_unselected"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="@font/bold"
-            android:text="@string/cashflow"
-            android:textAlignment="center"
-            android:textColor="@color/normal_text"
-            android:textSize="12sp" />
+            <!-- Expense -->
+            <TextView
+                android:id="@+id/tvSelectExpense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chart_value_type_unselected"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/bold"
+                android:text="@string/expense"
+                android:textAlignment="center"
+                android:textColor="@color/normal_text"
+                android:textSize="12sp" />
 
-    </LinearLayout>
+            <!-- Cash Flow -->
+            <TextView
+                android:id="@+id/tvSelectCashflow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chart_value_type_unselected"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/bold"
+                android:text="@string/cashflow"
+                android:textAlignment="center"
+                android:textColor="@color/normal_text"
+                android:textSize="12sp" />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lcLineChartMultiple"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llValueTypes"
-        tools:visibility="gone" />
+        </LinearLayout>
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/bcBarChartMultiple"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llValueTypes"
-        tools:visibility="visible" />
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lcLineChartMultiple"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="24dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llValueTypes"
+            tools:visibility="gone" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bcBarChartMultiple"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="24dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llValueTypes"
+            tools:visibility="visible" />
 
         <com.google.android.material.slider.RangeSlider
             android:id="@+id/rsTimeRange"
@@ -123,271 +128,72 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bcBarChartMultiple"
             app:thumbElevation="0dp"
-            app:tickColorActive="@color/secondary_light"
-            app:tickColorInactive="@color/secondary"
-            app:trackColorActive="@color/secondary"
+            app:tickColorActive="@color/primary_light"
+            app:tickColorInactive="@color/secondary_light"
+            app:trackColorActive="@color/primary_light"
             app:trackColorInactive="@color/secondary_light"
             app:values="@array/initial_time_range_slider_values" />
 
-    <LinearLayout
-        android:id="@+id/llChartTypes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@drawable/bg_white_rounded"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rsTimeRange">
-
-        <!-- Line chart -->
-        <ImageView
-            android:id="@+id/ivSelectLineChart"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/llChartTypes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_line_chart_unselected"
-            tools:background="@drawable/bg_chart_type_selected"
-            tools:src="@drawable/ic_line_chart_selected" />
+            android:background="@drawable/bg_white_rounded"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rsTimeRange">
 
-        <!-- Area chart -->
-        <ImageView
-            android:id="@+id/ivSelectAreaChart"
-            android:layout_width="0dp"
+            <!-- Line chart -->
+            <ImageView
+                android:id="@+id/ivSelectLineChart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chart_type_unselected"
+                android:src="@drawable/ic_line_chart_unselected"
+                tools:background="@drawable/bg_chart_type_selected"
+                tools:src="@drawable/ic_line_chart_selected" />
+
+            <!-- Area chart -->
+            <ImageView
+                android:id="@+id/ivSelectAreaChart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chart_type_unselected"
+                android:src="@drawable/ic_area_chart_unselected" />
+
+            <!-- Bar chart -->
+            <ImageView
+                android:id="@+id/ivSelectBarChart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chart_type_unselected"
+                android:src="@drawable/ic_bar_chart_unselected" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvData"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_area_chart_unselected" />
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llChartTypes"
+            tools:listitem="@layout/item_data" />
 
-        <!-- Bar chart -->
-        <ImageView
-            android:id="@+id/ivSelectBarChart"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_chart_type_unselected"
-            android:src="@drawable/ic_bar_chart_unselected" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llContainerNetWorth"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_white_rounded"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/llContainerTotalIncome"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llChartTypes">
-
-        <TextView
-            android:id="@+id/tvNetWorthLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="@string/charts_net_worth"
-            android:textAlignment="center"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tvNetWorthValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:textSize="16sp"
-            tools:text="10,000" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llContainerTotalIncome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_white_rounded"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:layout_marginStart="20dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/llContainerTotalExpense"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/llContainerNetWorth"
-        app:layout_constraintTop_toBottomOf="@id/llChartTypes">
-
-        <TextView
-            android:id="@+id/tvTotalIncomeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="@string/total_income"
-            android:textAlignment="center"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tvTotalIncomeValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:textSize="16sp"
-            tools:text="10,000" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llContainerTotalExpense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_white_rounded"
-        android:layout_marginHorizontal="20dp"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/llContainerTotalIncome"
-        app:layout_constraintTop_toBottomOf="@id/llChartTypes">
-
-        <TextView
-            android:id="@+id/tvTotalExpenseLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="@string/total_expense"
-            android:textAlignment="center"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tvTotalExpenseValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:textSize="16sp"
-            tools:text="10,000" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llContainerAverageCashflow"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_white_rounded"
-        android:layout_marginHorizontal="20dp"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llContainerNetWorth">
-
-        <TextView
-            android:id="@+id/tvAverageCashflowLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="@string/average_cashflow"
-            android:textAlignment="center"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tvAverageCashflowValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:textSize="16sp"
-            tools:text="10,000" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llContainerAverageIncome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_white_rounded"
-        android:layout_marginHorizontal="20dp"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/llContainerAverageCashflow"
-        app:layout_constraintTop_toBottomOf="@id/llContainerNetWorth">
-
-        <TextView
-            android:id="@+id/tvAverageIncomeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="@string/average_income"
-            android:textAlignment="center"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tvAverageIncomeValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:textSize="16sp"
-            tools:text="10,000" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llContainerAverageExpense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_white_rounded"
-        android:layout_marginHorizontal="20dp"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/llContainerAverageIncome"
-        app:layout_constraintTop_toBottomOf="@id/llContainerNetWorth">
-
-        <TextView
-            android:id="@+id/tvAverageExpenseLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="@string/average_expense"
-            android:textAlignment="center"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tvAverageExpenseValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:textSize="16sp"
-            tools:text="10,000" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

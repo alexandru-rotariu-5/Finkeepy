@@ -33,13 +33,4 @@
         android:padding="20dp"
         android:src="@drawable/selector_menu_charts" />
 
-    <ImageButton
-        android:id="@+id/btnMenuData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/bg_bottom_menu_button"
-        android:padding="20dp"
-        android:src="@drawable/selector_menu_data" />
-
 </LinearLayout>

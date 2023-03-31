@@ -4,5 +4,4 @@ enum class Screen {
     DASHBOARD,
     RECORDS,
     CHARTS,
-    DATA,
 }

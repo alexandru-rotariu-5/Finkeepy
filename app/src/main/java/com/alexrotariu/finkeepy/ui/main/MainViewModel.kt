@@ -35,35 +35,51 @@ class MainViewModel @Inject constructor(private val recordsRepository: RecordsRe
         }
     }
 
-    fun getNetWorth(): Double {
-        return records.value?.get(0)?.netWorth ?: 0.0
+    private fun getRecordsByTimeRange(timeRange: Pair<Float, Float>): List<Record?>? {
+        return records.value?.reversed()?.subList(timeRange.first.toInt(), timeRange.second.toInt())
     }
 
-    fun getTotalIncome(): Double {
-        return records.value?.sumOf { it?.income ?: 0.0 } ?: 0.0
+    fun getNetWorth(
+        timeRange: Pair<Float, Float> = Pair(
+            0f,
+            records.value?.size?.toFloat() ?: 0f
+        )
+    ): Double {
+        return getRecordsByTimeRange(timeRange)?.last()?.netWorth ?: 0.0
     }
 
-    fun getTotalExpense(): Double {
-        val recordsList = records.value!!
+    fun getTotalIncome(timeRange: Pair<Float, Float>): Double {
+        return getRecordsByTimeRange(timeRange)?.sumOf { it?.income ?: 0.0 } ?: 0.0
+    }
+
+    fun getTotalExpense(timeRange: Pair<Float, Float>): Double {
+        val adaptedTimeRange = Pair(
+            if (timeRange.first == 0f) timeRange.first else timeRange.first - 1f,
+            timeRange.second
+        )
+        val recordsList = getRecordsByTimeRange(adaptedTimeRange)!!
+        val adaptedRecordsListIndices =
+            if (timeRange.first == 0f) recordsList.indices else recordsList.indices.toList()
+                .subList(1, recordsList.size)
         var totalExpense = 0.0
-        for (i in recordsList.indices) {
-            val previousNetWorth = recordsList.getOrNull(i + 1)?.netWorth ?: 0.0
+        for (i in adaptedRecordsListIndices) {
+            val previousNetWorth = recordsList.getOrNull(i - 1)?.netWorth ?: 0.0
             totalExpense += recordsList[i]?.getExpense(previousNetWorth)
                 ?: 0.0
         }
         return totalExpense
     }
 
-    fun getAverageIncome(): Double {
-        return getTotalIncome() / records.value!!.size
+    fun getAverageIncome(timeRange: Pair<Float, Float>): Double {
+        return getTotalIncome(timeRange) / getRecordsByTimeRange(timeRange)!!.size
     }
 
-    fun getAverageExpense(): Double {
-        return getTotalExpense() / records.value!!.size
+    fun getAverageExpense(timeRange: Pair<Float, Float>): Double {
+        return getTotalExpense(timeRange) / getRecordsByTimeRange(timeRange)!!.size
     }
 
-    fun getAverageCashflow(): Double {
-        return getAverageIncome() - getAverageExpense()
+    fun getAverageCashflow(timeRange: Pair<Float, Float>): Double {
+        return getAverageIncome(timeRange) - getAverageExpense(timeRange)
     }
 
     fun getLastMonthCashflow(): Double {

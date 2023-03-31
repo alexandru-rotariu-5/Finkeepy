@@ -17,7 +17,6 @@ import com.alexrotariu.finkeepy.R
 import com.alexrotariu.finkeepy.databinding.ActivityMainBinding
 import com.alexrotariu.finkeepy.ui.main.charts.ChartsFragment
 import com.alexrotariu.finkeepy.ui.main.dashboard.DashboardFragment
-import com.alexrotariu.finkeepy.ui.main.data.DataFragment
 import com.alexrotariu.finkeepy.ui.main.records.RecordsFragment
 import com.alexrotariu.finkeepy.ui.models.Screen
 import com.alexrotariu.finkeepy.ui.notifications.NotificationsActivity
@@ -81,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             btnMenuDashboard.setOnClickListener { onDashboardClicked() }
             btnMenuRecords.setOnClickListener { onRecordsClicked() }
             btnMenuCharts.setOnClickListener { onChartsClicked() }
-            btnMenuData.setOnClickListener { onDataClicked() }
         }
 
         binding.clContainer.clHeader.ivSettings.setOnClickListener {
@@ -115,12 +113,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onDataClicked() {
-        if (currentScreen != Screen.DATA) {
-            goToScreen(Screen.DATA)
-        }
-    }
-
     fun goToScreen(screen: Screen) {
         val fragment = when (screen) {
             Screen.DASHBOARD -> {
@@ -131,9 +123,6 @@ class MainActivity : AppCompatActivity() {
             }
             Screen.CHARTS -> {
                 ChartsFragment()
-            }
-            Screen.DATA -> {
-                DataFragment()
             }
         }
 
@@ -170,7 +159,6 @@ class MainActivity : AppCompatActivity() {
                 Screen.DASHBOARD -> btnMenuDashboard
                 Screen.RECORDS -> btnMenuRecords
                 Screen.CHARTS -> btnMenuCharts
-                Screen.DATA -> btnMenuData
             }
 
             button.isSelected = true
