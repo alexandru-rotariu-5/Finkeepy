@@ -16,7 +16,7 @@ class RecordsFragment : Fragment() {
 
     private var _binding: FragmentRecordsBinding? = null
     private val binding get() = _binding!!
-    
+
     private lateinit var mainActivity: MainActivity
 
     private lateinit var recordAdapter: RecordAdapter
@@ -69,20 +69,22 @@ class RecordsFragment : Fragment() {
     }
 
     private fun updateMainHeaderTitleY(scrollY: Int) {
-        val mainHeaderTitleY = when {
-            scrollY in 70..120 -> 130f - (2.6f * (scrollY - 70))
-            scrollY > 120 -> 0f
-            else -> 130f
+        val initialY = mainActivity.getMainHeaderHeight() / 2 + 50f
+        if (scrollY in 70..120) {
+            val y = initialY + (scrollY - 70f) * (0f - initialY) / (120f - 70f)
+            mainActivity.setMainHeaderTitleY(y)
+        } else if (scrollY < 70) {
+            mainActivity.setMainHeaderTitleY(initialY)
+        } else {
+            mainActivity.setMainHeaderTitleY(0f)
         }
-
-        mainActivity.setMainHeaderTitleY(mainHeaderTitleY)
     }
 
 
     private fun setupMainHeaderTitle() {
         mainActivity.apply {
             setMainHeaderTitle(getString(R.string.records))
-            setMainHeaderTitleY(130f)
+            setMainHeaderTitleY(mainActivity.getMainHeaderHeight() / 2 + 50f)
             showMainHeaderTitle()
         }
     }

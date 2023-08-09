@@ -151,6 +151,10 @@ class MainActivity : AppCompatActivity() {
         binding.clHeader.tvTitle.translationY = y
     }
 
+    fun getMainHeaderHeight(): Int {
+        return binding.clHeader.root.height
+    }
+
     private fun updateBottomMenu(screen: Screen) {
         resetMenuButtons()
 

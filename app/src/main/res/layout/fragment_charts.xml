@@ -132,6 +132,7 @@
             app:tickColorInactive="@color/secondary_light"
             app:trackColorActive="@color/primary_light"
             app:trackColorInactive="@color/secondary_light"
+            app:trackHeight="2dp"
             app:values="@array/initial_time_range_slider_values" />
 
         <LinearLayout
